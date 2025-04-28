@@ -17,7 +17,7 @@
 ---
 #### 가령 <br>
 
-노션 링크 : https://www.notion.so/1befab33b89880939b40fba702632552?pvs=4
+노션 링크 : https://www.notion.so/1e3fab33b8988020a230f2174399257a?v=1e3fab33b89880d4b1c4000c7fa974a1&pvs=4
 
 
 
