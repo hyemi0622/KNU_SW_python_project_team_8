@@ -15,7 +15,7 @@
 노션 링크 : https://www.notion.so/1-1e3f45b223d18099a575e7c2e8ae8440?pvs=4
 
 ---
-#### 가령 <br>
+#### 🔧 가령 <br>
 
 노션 링크 : https://www.notion.so/1e3fab33b8988020a230f2174399257a?v=1e3fab33b89880d4b1c4000c7fa974a1&pvs=4
 
@@ -23,4 +23,4 @@
 
 ---
 
-#### 혜민 <br>
+#### ⚙️ 혜민 <br>
