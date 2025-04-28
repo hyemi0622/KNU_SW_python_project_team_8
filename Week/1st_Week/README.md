@@ -86,6 +86,10 @@ python manage.py runserver
 ---
 #### 가령 <br>
 
+노션 링크 : https://www.notion.so/1befab33b89880939b40fba702632552?pvs=4
+
+
+
 ---
 
 #### 혜민 <br>
