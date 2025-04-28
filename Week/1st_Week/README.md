@@ -25,3 +25,5 @@
 ---
 
 #### ⚙️ 혜민 <br>
+> 숫자 게임 : https://www.arealme.com/number-memory-test/ko/ <br>
+기억력 게임 : https://www.arealme.com/memory-test/ko/
