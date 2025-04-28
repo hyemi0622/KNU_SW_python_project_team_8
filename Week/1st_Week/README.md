@@ -18,7 +18,7 @@
 #### 🔧 가령 <br>
 
 노션 링크 : https://www.notion.so/1e3fab33b8988020a230f2174399257a?v=1e3fab33b89880d4b1c4000c7fa974a1&pvs=4 <br><br>
-👉 기능 명세서 완성<br>
+✅ 기능 명세서 완성<br>
 
 ![기능명세서](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/images/photo.png?raw=true)
 
