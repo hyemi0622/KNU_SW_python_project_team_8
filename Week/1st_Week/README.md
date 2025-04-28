@@ -1,18 +1,23 @@
-### 다음 만나는 날짜 : 4/28 (월) 4시30분
+### 📝 회의 일시 : 4/28 (월) 4시30분
 
--혜민: 장고 환경 설정 배워서 알려주기.<br>
--가령:  기능 명세서 대략 작성해오기. (라이브러리 공부ing)<br>
--혜미: 디자인 사이트 알아오기.(html,css 공부 ing) .<br>
+⚙️ 혜민: 장고 환경 설정 배워서 알려주기.<br>
+🔧 가령:  기능 명세서 대략 작성해오기. (라이브러리 공부ing)<br>
+🎨 혜미: 디자인 사이트 알아오기.(html,css 공부 ing) .<br>
 
-다음 만나서 할일 
+#### 👥 회의 내용 
 
 - 기능명세서 완성
 - 장고 프레임워크 배우기 
 
 ---
-#### 혜미<br>
-참고 할 웹디자인 사이트 : https://dribbble.com/ <br><br>
-#### 💡 Django에서 템플릿 만드는 방법 <br>
+### 🎨 혜미<br>
+참고 할 웹디자인 사이트 : https://dribbble.com/ <br>
+손쉽게 웹사이트 만들 수 있는 사이트1 : https://www.wix.com/ <br>
+손쉽게 웹사이트 만들 수 있는 사이트2 : https://www.squarespace.com/ <br>
+웹사이트 디자인 할 수 있는 사이트 : https://www.figma.com/ko-kr/<br>
+직접 만들려면 ? : HTML, CSS, JavaScript 사용
+
+#### 💡 Django에서 템플릿 만들고 웹사이트 연결시키는 방법 <br>
 🛠️ 준비물 <br>
 1. Python 설치 <br>
 2. Django 설치 (명령어로 설치)
@@ -49,39 +54,33 @@ def home(request):<br>
 
 💡 render(request, '앱이름/index.html', {데이터}) : HTML파일과 데이터를 연결해줘.<br>
 
-📄 앱 내부 urls.py 작성
-python
-복사
-편집
-from django.urls import path
-from . import views
+> 📄 앱 내부 urls.py 작성<br>
+from django.urls import path<br>
+from . import views<br>
+urlpatterns = [ <br>
+&nbsp;&nbsp;&nbsp;path('', views.home, name='home'),<br>
+]<br>
 
-urlpatterns = [
-    path('', views.home, name='home'),
-]
-path('', views.home, name='home') : 홈페이지에 접속하면 home함수를 실행!
+💡 path('', views.home, name='home') : 홈페이지에 접속하면 home함수를 실행! <br>
 
-📄 templates/앱이름/index.html 작성
-html
-복사
-편집
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>기억을 깨우는 AI - Django</title>
-</head>
-<body>
-    <h1>환영합니다, {{ username }}님!</h1>
-</body>
-</html>
-Django도 {{ username }} 문법으로 데이터를 삽입해.
+> 📄 templates/앱이름/index.html 작성 <br>
+&lt;html&gt; <br>
+&lt;!DOCTYPE html&gt; <br>
+&lt;html lang="ko"&gt; <br>
+&lt;head&gt; <br>
+ &nbsp;&nbsp;   &lt;meta charset="UTF-8"&gt; <br>
+  &nbsp;&nbsp;  &lt;title&lt;기억을 깨우는 AI - Django&lt;/title&gt; <br>
+&lt;/head&gt; <br>
+&lt;body&gt; <br>
+  &nbsp;&nbsp;  &lt;h1&gt;환영합니다, {{ username }}님!&lt;/h1&gt; <br>
+&lt;/body&gt; <br>
+&lt;/html&gt; <br>
 
-▶️ 서버 실행하기
-bash
-복사
-편집
-python manage.py runserver
+💡 Django도 {{ username }} 문법으로 데이터를 삽입함
+
+
+#### ▶️ 서버 실행하기
+> python manage.py runserver<br>
 브라우저에서 http://127.0.0.1:8000/ 접속!
 ---
 #### 가령 <br>
