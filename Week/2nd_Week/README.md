@@ -12,7 +12,7 @@
 
 ---
 ### 🎨 혜미<br>
-
+https://www.notion.so/2-1f0f45b223d1807e907fc321b96dac0a?pvs=4
 
 
 ---
