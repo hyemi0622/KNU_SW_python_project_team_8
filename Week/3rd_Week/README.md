@@ -9,7 +9,7 @@
 - 보완점 피드백
 ---
 ### 🎨 혜미<br>
-[![html](https://img.shields.io/badge/%20html-28a745)](Week/3rd_Week/index.html)
+[![html](https://img.shields.io/badge/%20html-28a745)](KNU_SW_python_project_team_8/Week/3rd_Week/index.html)
 [![css](https://img.shields.io/badge/%20css-28a745)](Week/3rd_Week/style.css)
 ---
 #### 🔧 가령 <br>
