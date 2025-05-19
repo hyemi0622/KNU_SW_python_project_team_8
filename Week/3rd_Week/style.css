@@ -119,11 +119,36 @@ body {
   text-align: left;
 }
 
-.hero-left h1 {
+#wave-title {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
   line-height: 1.4;
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+.wave-letter {
+  display: inline-block;
+  animation: bounce-in 0.6s ease forwards;
+  opacity: 0;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(-15px);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .hero-left p {
@@ -135,7 +160,7 @@ body {
 
 .explore-btn {
   background-color: #000;
-  color: #fff;
+  color: #d3d9c2;
   border: none;
   border-radius: 999px;
   padding: 0.7rem 2rem;
