@@ -9,8 +9,8 @@
 - 보완점 피드백
 ---
 ### 🎨 혜미<br>
-[![html](https://img.shields.io/badge/%20html-28a745)](./index.html)
-[![css](https://img.shields.io/badge/%20css-28a745)](./style.css)
+[![html](https://img.shields.io/badge/%20html-41423c)](./index.html)
+[![css](https://img.shields.io/badge/%20css-41423c)](./style.css)
 ---
 #### 🔧 가령 <br>
 
