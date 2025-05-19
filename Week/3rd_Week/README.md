@@ -9,8 +9,8 @@
 - 보완점 피드백
 ---
 ### 🎨 혜미<br>
-[![html](https://img.shields.io/badge/%20바로가기-28a745)](Week/3rd_Week/index.html)
-[![css](https://img.shields.io/badge/%20바로가기-28a745)](Week/3rd_Week/style.css)
+[![html](https://img.shields.io/badge/%20html-28a745)](Week/3rd_Week/index.html)
+[![css](https://img.shields.io/badge/%20css-28a745)](Week/3rd_Week/style.css)
 ---
 #### 🔧 가령 <br>
 
