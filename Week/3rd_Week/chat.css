@@ -175,3 +175,22 @@ body {
 .nav-controls span {
   font-size: 0.9rem;
 }
+/* EXIT 버튼 */
+.exit-button {
+  position: absolute;
+  top: 0.5rem;
+  left: 2rem;
+  background-color: transparent;
+  border: 1px solid #111;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: #111;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  z-index: 200;
+}
+
+.exit-button:hover {
+  background-color: #eee;
+}
