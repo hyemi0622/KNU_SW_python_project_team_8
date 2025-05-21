@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>그그그 뭐지</title>
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600&display=swap" rel="stylesheet" />
+
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+    }
+    .explore-btn {
+      font-family: 'Pretendard', sans-serif;
+    }
+    .navbar-menu button {
+      font-family: 'Pretendard', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <!--  상단바 -->
+  <div class="navbar-outer">
+    <div class="navbar-inner">
+      <div class="navbar-left">
+        <div class="logo">Moji</div>
+        <div class="navbar-menu">
+          <button>What is?</button>
+          <button>Memory Game</button>
+          <a href="fourpanel.html"><button>Four-panel Comic</button></a>
+          <button>Remember Other Users</button>
+        </div>
+      </div>
+
+      <div class="navbar-right">
+        <div class="dot black"></div>
+        <div class="dot chachol"></div>
+        <div class="dot gray"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!--  메인 콘텐츠 (Hero 영역 분할) -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1 id="wave-title">Call Back the Lost<br>Moments</h1>
+      <p>Can’t recall that one word or moment? <br>
+        We turn fuzzy thoughts into clear memories.<br>
+        Let’s bring your story back—together.<br>
+      </p>
+      <a href="chat.html">
+  <button class="explore-btn">Find Your Memory</button>
+</a></div>
+    <div class="hero-right">
+      <img src="모지.png" alt="Character" />
+    </div>
+  </section>
+
+  <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const title = document.getElementById("wave-title");
+    const nodes = Array.from(title.childNodes);
+    let i = 0;
+
+    title.innerHTML = '';
+
+    nodes.forEach(node => {
+      if (node.nodeType === 3) {
+        // 일반 텍스트
+        const chars = node.textContent.split('');
+        chars.forEach(char => {
+          const span = document.createElement('span');
+          span.textContent = char === ' ' ? '\u00A0' : char;
+          span.classList.add('wave-letter');
+          span.style.animationDelay = `${i * 0.08}s`;
+          title.appendChild(span);
+          i++;
+        });
+      } else if (node.nodeType === 1 && node.tagName === 'BR') {
+        // <br> 태그
+        title.appendChild(document.createElement('br'));
+      }
+    });
+  });
+</script>
+
+</body>
+</body>
+</html>
