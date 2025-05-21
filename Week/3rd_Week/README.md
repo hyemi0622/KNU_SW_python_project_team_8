@@ -9,7 +9,7 @@
 - 보완점 피드백
 ---
 ### 🎨 혜미<br>
-[![html](https://img.shields.io/badge/%20Web%20Design-41423c)]([./index.html](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Code/WebDesign))
+[![html](https://img.shields.io/badge/%20Web%20Design-41423c)]((https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Code/WebDesign)
 
 ---
 #### 🔧 가령 <br>
