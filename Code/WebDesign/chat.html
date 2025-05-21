@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat - Moji</title>
+  <link rel="stylesheet" href="chat.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="chat-layout">
+     <a href="index.html" class="exit-button">← Exit</a>
+    <!-- 왼쪽 채팅 영역 -->
+    <div class="chat-main">
+      <div class="chat-header">
+      </div>
+
+      <!-- ✅ 진행 바 -->
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+
+      <div class="chat-box">
+        <div class="message bot">
+          <img src="bot.png" alt="Bot" />
+          <div class="message-content">안녕하세요. 무엇을 도와드릴까요?</div>
+        </div>
+        <div class="message user">
+          <img src="user.png" alt="User" />
+          <div class="message-content">기억을 찾고 싶어요!</div>
+        </div>
+      </div>
+
+      <div class="chat-input">
+        <input type="text" placeholder="메시지를 입력하세요..." />
+        <button onclick="nextQuestion()">Next</button>
+      </div>
+    </div>
+
+    <!-- 오른쪽 기억 목록 카드 영역 -->
+    <div class="side-panel">
+      <h4>For Your Memory</h4>
+      <div class="card-container" id="cardContainer"></div>
+      <div class="nav-controls">
+        <button onclick="changeCard(-1)">←</button>
+        <span id="card-index">01 — 02</span>
+        <button onclick="changeCard(1)">→</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="chat.js"></script>
+</body>
+</html>
