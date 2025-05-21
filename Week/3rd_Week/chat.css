@@ -110,7 +110,7 @@ body {
 .side-panel {
   flex: 1;
   padding: 2rem;
-  background-color: #f0f0f0;
+  background-color:  #C4C4C4;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -133,7 +133,19 @@ body {
   border-radius: 12px;
   overflow: hidden;
   display: none;
+
+  /* 기존 효과 + 최적화 */
+  transition: transform 0.2s ease;
+  will-change: transform;                    /* 브라우저에 미리 준비 요청 */
+  transform-style: preserve-3d;              /* 3D 회전 시 품질 보존 */
+  backface-visibility: hidden;               /* 회전 중 뒷면 렌더 방지 */
 }
+
+.memory-card:hover {
+  transform: rotateZ(-2deg); /* 좌측으로 갸우뚱 */
+}
+
+
 
 .memory-card.active {
   display: block;
@@ -165,7 +177,7 @@ body {
 
 .nav-controls button {
   border: 1px solid #000;
-  background: #f0f0f0;
+  background: #C4C4C4;
   border-radius: 6px;
   padding: 0.2rem 0.5rem;
   font-size: 1rem;
