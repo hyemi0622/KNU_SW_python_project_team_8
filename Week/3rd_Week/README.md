@@ -9,11 +9,11 @@
 - 보완점 피드백
 ---
 ### 🎨 혜미<br>
-[![html](https://img.shields.io/badge/%20html-41423c)](./index.html)
-[![css](https://img.shields.io/badge/%20css-41423c)](./style.css)
-[![css](https://img.shields.io/badge/%20css-41423c)](./chat.html)
-[![css](https://img.shields.io/badge/%20css-41423c)](./chat.css)
-[![css](https://img.shields.io/badge/%20css-41423c)](./chat.js)
+[![html](https://img.shields.io/badge/%20home%20html-41423c)](./index.html)
+[![css](https://img.shields.io/badge/%20home%20css-41423c)](./style.css)
+[![css](https://img.shields.io/badge/%20chat%20html-41423c)](./chat.html)
+[![css](https://img.shields.io/badge/%20chat%20hcss-41423c)](./chat.css)
+[![css](https://img.shields.io/badge/%20chat%20js-41423c)](./chat.js)
 ---
 #### 🔧 가령 <br>
 
