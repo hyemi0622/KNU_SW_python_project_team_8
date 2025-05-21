@@ -16,7 +16,7 @@
 [![js](https://img.shields.io/badge/%20chat%20js-41423c)](./chat.js)
 ---
 #### 🔧 가령 <br>
-[![Django](https://img.shields.io/badge/%20Djangos-41423c)](Code/team_djangos)
+[![Django](https://img.shields.io/badge/%20Djangos-41423c)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Code/team_djangos)
 
 
 ---
