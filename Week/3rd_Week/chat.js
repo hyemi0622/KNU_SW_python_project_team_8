@@ -55,7 +55,7 @@ function changeCard(direction) {
 
 renderCards();
 
-// ✅ 진행 바 로직
+// ✅진행 바 로직
 let currentQuestion = 0;
 const totalQuestions = 15;
 const progressBar = document.getElementById('progress-bar');
