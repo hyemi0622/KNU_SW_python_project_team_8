@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Four-panel Comic</title>
+  <link rel="stylesheet" href="fourpanel.css" />
+</head>
+<body>
+
+  <section class="section-top">
+    <div class="how-to-text">
+      <!-- 항상 웨이브 애니메이션: class="wave-title always" -->
+      <h2 class="keyword-floating-title wave-title always">How To Use</h2>
+      <p class="description">— Hesitating just before memory opens its door —</p>
+    </div>
+  </section>
+
+  <section class="fourpanel-wrapper">
+    <div class="comic-title">
+      An AI that helps you recall what once was forgotten.<br>
+      Piecing together your memories, one fragment at a time.<br>
+      Because even lost moments deserve a second chance.
+    </div>
+
+    <div class="comic-display">
+      <div class="slider-container">
+        <div class="slider" id="comicWrapper">
+          <!-- JS로 네컷 만화 묶음이 들어감 -->
+        </div>
+      </div>
+    </div>
+
+    <div class="comic-nav">
+      <button onclick="changePage(-1)">←</button>
+      <div id="comic-index-wrapper">
+        <span id="comic-index">01 — 02</span>
+      </div>
+      <button onclick="changePage(1)">→</button>
+    </div>
+  </section>
+
+  <section class="section-bottom">
+    <div class="keyword-header">
+      <!-- 스크롤 등장 시 웨이브: class="wave-title" + id 부여 -->
+      <h2 class="keyword-floating-title wave-title" id="keyword-wave-title">Keywords Unlock Memories</h2> 
+      <p class="description">— Even a small answer can awaken a precious memory. —</p>
+    </div>
+    <div class="keyword-section">
+      <div class="keyword-block">
+        <div class="keyword-tags">
+          <span>#기억 찾기</span>
+          <span>#그그그 뭐지</span>
+          <span>#모지와 함께</span>
+          <span>#깜빡한 기억</span>
+          <span>#되살리기</span>
+          <span>#기억조각 모음</span>
+          
+          <span>#잊고 있던 순간</span>
+          <span>#어릴 적 추억</span>
+          <span>#찾고싶은 노래</span>
+          <span>#그날의 대화</span>
+          <span>#잊힌 장소</span>
+          <span>#기억 회상</span>
+
+          <span>#기억의 공백</span>
+          <span>#1초 전 기억</span>
+          <span>#함께 찾아보아요</span>
+          <span>#AI 모지</span>
+          <span>#생각 안 나는 단어</span>
+          <span>#뭐더라</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-new">
+  <div class="new-header">
+    <h2 class="keyword-floating-title wave-title" id="team-wave-title">For Your Memory</h2>
+    <p class="description">— Who we are and what drives us —</p>
+  </div>
+  <div class="new-block">
+    <p class="new-description">
+      We are a team of passionate developers committed to helping users retrieve their precious memories.
+      <br />
+      With creativity, empathy, and technology, we aim to make forgetfulness a thing of the past.
+    </p>
+  </div>
+</section>
+
+  <script src="fourpanel.js"></script>
+  <!-- wave 애니메이션 JS는 별도 파일에서 불러오세요 -->
+</body>
+</html>
