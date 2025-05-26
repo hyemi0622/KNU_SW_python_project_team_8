@@ -23,8 +23,8 @@
 | 1주차     | [![1주차 내용](https://img.shields.io/badge/1주차_내용-60a5fa)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Week/1st_Week)          | 게임 형식 조사  | 기능 명세서 작성 / 사용 라이브러리 조사     | 참고할 디자인 사이트 조사 / 웹디자인 공부  |![status](https://img.shields.io/badge/Finish%20-009000) |
 | 2주차 | [![2주차 내용](https://img.shields.io/badge/2주차_내용-60a5fa)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Week/2nd_Week)    | Django 환경 설정 공유 | 라이브러리 조사 + 응용 | 디자인 명세서 작성, 프롬프트 부분 약간 구현 |![status](https://img.shields.io/badge/Finish%20-009000) |
 | 3주차 |  [![3주차 내용](https://img.shields.io/badge/3주차_내용-60a5fa)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Week/3rd_Week)    | 게임 조사 + 방향 설정 | chat 기능 개발 | 웹사이트 디자인 |![status](https://img.shields.io/badge/Finish%20-009000) |
-| 4주차 | [![4주차 내용](https://img.shields.io/badge/4주차_내용-60a5fa)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Week/4th_Week)  | 게임 개발 | chat 기능 개발 | 웹사이트 개발 |![status](https://img.shields.io/badge/Not%20started-112051) |
-| 5주차 |   | |  chat과 API 연동 |   |![status](https://img.shields.io/badge/Not%20started-112051) |
-| 6주차 |   ||  서버 연동 |   |![status](https://img.shields.io/badge/Not%20started-112051) |
+| 4주차 | [![4주차 내용](https://img.shields.io/badge/4주차_내용-60a5fa)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Week/4th_Week)  | 게임 개발 | chat 기능 개발 | 웹사이트 home, chat화면, What is? 파트 개발 |![status](https://img.shields.io/badge/Not%20started-112051) |
+| 5주차 |   | |  chat과 API 연동 | 웹사이트 Meet The Team, Remember Other users 파트 개발  |![status](https://img.shields.io/badge/Not%20started-112051) |
+| 6주차 |   ||  서버 연동 |  Memory Game 파트 디자인 수정  |![status](https://img.shields.io/badge/Not%20started-112051) |
 | 7주차 |   |  |  |   |![status](https://img.shields.io/badge/Not%20started-112051) |
 
