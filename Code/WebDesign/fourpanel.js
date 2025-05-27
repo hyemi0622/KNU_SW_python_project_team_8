@@ -85,6 +85,24 @@ window.addEventListener('DOMContentLoaded', () => {
   wrapper.appendChild(initial);
   indexText.textContent = `01 — ${String(comics.length).padStart(2, '0')}`;
 });
+const comicDisplay = document.querySelector('.comic-display');
+const comicNav = document.querySelector('.comic-nav');
+
+if (comicDisplay && comicNav) {
+  const comicObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        comicDisplay.classList.add('visible');
+        comicNav.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.9
+  });
+
+  comicObserver.observe(comicDisplay); // 관측 대상은 그대로 comicDisplay
+}
 
 // ========================
 // 웨이브 애니메이션 효과
@@ -163,3 +181,99 @@ window.addEventListener("DOMContentLoaded", () => {
     tagObserver.observe(keywordTags);
   }
 });
+
+ const memoryTips = [
+    "충분한 수면은 기억 정리에 도움을 줘요.",
+    "메모하거나 그림으로 정리해보세요.",
+    "반복 복습이 장기기억에 효과적이에요.",
+    "운동은 뇌 활동을 자극해 기억력을 향상시켜요.",
+    "잠자기 전 복습은 기억에 오래 남아요.",
+    "연결고리를 만들어 기억을 확장해보세요.",
+    "소리 내어 말하면 기억에 더 오래 남습니다.",
+    "냄새, 음악과 함께 기억하면 생생하게 떠올라요.",
+    "호기심을 갖는 순간, 기억은 더 오래 갑니다.",
+    "나만의 방식으로 재구성하면 잊기 어렵습니다.",
+    "정보를 이야기로 만들어보세요. 스토리는 오래 남습니다.",
+    "같은 내용을 다른 방식으로 표현해보세요.",
+    "장소와 함께 기억하면 더 쉽게 떠올라요.",
+    "관련된 이미지를 떠올리면 시각적 기억이 강화됩니다.",
+    "마인드맵을 활용해 흐름을 시각화하세요.",
+    "낯선 단어는 유사 발음으로 연상해보세요.",
+    "정리하고 남에게 설명해보세요.",
+    "자기 전에 '오늘 배운 것'을 떠올려보세요.",
+    "실제 경험과 연결되면 기억이 단단해져요.",
+    "손으로 쓰면 기억이 더 오래갑니다.",
+    "게임처럼 문제를 만들어 풀어보세요.",
+    "강조 표시나 색을 이용해 시각적으로 구분해보세요.",
+    "감정을 담은 기억은 오래 남습니다.",
+    "목표가 있으면 기억의 집중도가 높아집니다.",
+    "소리, 이미지, 행동이 동시에 있으면 기억력이 강화돼요.",
+    "특정 시간에 반복하면 뇌가 기억을 강화해요.",
+    "집중 시간은 짧게, 쉬는 시간은 자주!",
+    "심호흡과 명상은 뇌를 리셋해줘요.",
+    "배운 내용을 직접 적용해보세요.",
+    "처음과 마지막에 본 것이 더 잘 기억돼요.",
+    "비슷한 내용을 비교하면 차이점이 기억에 남아요.",
+    "머릿속으로 그려보는 시뮬레이션도 효과적이에요.",
+    "타이머로 집중력을 높이고 기억력을 훈련하세요."
+  ];
+
+  // 현재 카드에 들어간 문구들
+  let currentTips = [];
+
+  function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function assignRandomTips() {
+    currentTips = shuffle(memoryTips).slice(0, 3);
+    document.querySelectorAll('.card-text').forEach((el, i) => {
+      el.innerText = currentTips[i];
+    });
+  }
+
+  function getNewTip(excludeList) {
+    const candidates = memoryTips.filter(tip => !excludeList.includes(tip));
+    if (candidates.length === 0) return null;
+    const idx = Math.floor(Math.random() * candidates.length);
+    return candidates[idx];
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    assignRandomTips();
+
+    const cards = document.querySelectorAll('.card-item');
+    cards.forEach((card, idx) => {
+      card.addEventListener('click', () => {
+        const currentText = currentTips[idx];
+        const others = currentTips.filter((_, i) => i !== idx);
+        const newTip = getNewTip(others);
+        if (newTip) {
+          card.querySelector('.card-text').innerText = newTip;
+          currentTips[idx] = newTip;
+        }
+      });
+    });
+  });
+
+  const cardGrid = document.querySelector('.card-grid');
+
+if (cardGrid) {
+  const cardObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        cardGrid.classList.add('visible');
+        observer.unobserve(entry.target); // 한 번만
+      }
+    });
+  }, {
+    threshold: 0.3, // 스크롤 30% 보일 때
+  });
+
+  cardObserver.observe(cardGrid);
+}
