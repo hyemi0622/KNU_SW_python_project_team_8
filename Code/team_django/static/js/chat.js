@@ -1,72 +1,116 @@
+document.addEventListener("DOMContentLoaded", () => {
+  // ✅ 상태 변수
+  let isTyping = false;
 
+  const input = document.getElementById("userInput");
+  const sendBtn = document.getElementById("sendBtn");
+  const intro = document.getElementById("intro");
+  const messageContainer = document.getElementById("chatMessages");
+  const messagesInner = document.getElementById("messagesInner");
+  const scrollBtn = document.getElementById("scrollToBottom");
+  const startCard = document.getElementById("startCard");
 
+  function sendMessage() {
+    const message = input.value.trim();
 
-const cardData = [
-    {
-      title: "기분이 좋아지는 립스틱 💄",
-      desc: "분홍 립스틱은 입술뿐만 아니라 기분도 핑크핑크하게 만들어 줍니다.",
-      tags: "✨ 이 기억이 포함된 키워드: #핑크 #PINK #행복"
-    },
-    {
-      title: "좋아했던 풍경 🌅",
-      desc: "저녁노을 속에서 함께 걷던 그 길. 따뜻한 기억이 남아있어요.",
-      tags: "✨ 이 기억이 포함된 키워드: #노을 #산책 #그때그시절"
-    },
-    {
-      title: "추억의 음악 🎶",
-      desc: "그 노래가 나오면 언제나 떠오르는 순간이 있어요.",
-      tags: "✨ 이 기억이 포함된 키워드: #노래 #음악 #그때"
-    },
-    {
-      title: "소중했던 편지 ✉️",
-      desc: "한 글자 한 글자에 마음이 담긴 편지를 아직도 간직하고 있어요.",
-      tags: "✨ 이 기억이 포함된 키워드: #편지 #따뜻함 #소중함"
+    if (message === "" || isTyping) {
+      if (message === "") shakeInput();
+      return;
     }
-  ];
-  
-  let currentPage = 0;
-  const cardsPerPage = 2;
-  const cardContainer = document.getElementById('cardContainer');
-  const indexSpan = document.getElementById('card-index');
-  
-  function renderCards() {
-    cardContainer.innerHTML = '';
-    const start = currentPage * cardsPerPage;
-    const visibleCards = cardData.slice(start, start + cardsPerPage);
-  
-    visibleCards.forEach(card => {
-      const div = document.createElement('div');
-      div.className = 'memory-card active';
-      div.innerHTML = `
-        <div class="box">
-          <h4>${card.title}</h4>
-          <p>${card.desc}</p>
-          <p>${card.tags}</p>
-        </div>`;
-      cardContainer.appendChild(div);
+
+    // ✅ 첫 채팅 시 intro 숨김 + 채팅 영역 표시
+    if (intro.style.display !== "none") {
+      intro.style.display = "none";
+      messageContainer.style.display = "flex";
+    }
+
+    // ✅ 상태 변경 및 버튼 UI 변경
+    isTyping = true;
+    sendBtn.innerHTML = `<span class="square-dot"></span>`;
+
+    // ✅ 사용자 메시지 생성
+    const userMsg = document.createElement("div");
+    userMsg.className = "message user";
+    userMsg.innerText = message;
+    messagesInner.appendChild(userMsg);
+
+    // ✅ AI 자리 생성
+    const aiMsg = document.createElement("div");
+    aiMsg.className = "message ai typing";
+    aiMsg.innerHTML = `<span class="ai-typing-indicator">●</span>`;
+    messagesInner.appendChild(aiMsg);
+
+    scrollToBottom();
+
+    // ✅ 3.2초 후 AI 응답 교체
+    setTimeout(() => {
+      aiMsg.classList.remove("typing");
+      aiMsg.innerHTML = "안녕, 윤희! 😊<br>무엇을 도와드릴까?";
+      isTyping = false;
+      sendBtn.innerHTML = "↑";
+      scrollToBottom();
+    }, 3200);
+
+    input.value = "";
+  }
+
+  // ✅ 흔들림 효과
+  function shakeInput() {
+    input.classList.add("shake");
+    setTimeout(() => input.classList.remove("shake"), 300);
+  }
+
+  // ✅ 부드럽게 스크롤 아래로
+  function scrollToBottom() {
+    messageContainer.scrollTo({
+      top: messageContainer.scrollHeight,
+      behavior: "smooth"
     });
-  
-    const totalPages = Math.ceil(cardData.length / cardsPerPage);
-    indexSpan.textContent = `${String(currentPage + 1).padStart(2, '0')} — ${String(totalPages).padStart(2, '0')}`;
   }
-  
-  function changeCard(direction) {
-    const totalPages = Math.ceil(cardData.length / cardsPerPage);
-    currentPage = (currentPage + direction + totalPages) % totalPages;
-    renderCards();
-  }
-  
-  renderCards();
-  
-  // ✅ 진행 바 로직
-  let currentQuestion = 0;
-  const totalQuestions = 15;
-  const progressBar = document.getElementById('progress-bar');
-  
-  function nextQuestion() {
-    if (currentQuestion < totalQuestions) {
-      currentQuestion++;
-      const percent = (currentQuestion / totalQuestions) * 100;
-      progressBar.style.width = `${percent}%`;
+
+  // ✅ 전송 버튼 & 엔터 키 이벤트
+  sendBtn.addEventListener("click", sendMessage);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      sendMessage();
     }
+  });
+
+  // ✅ 하단 이동 버튼 클릭 이벤트
+  scrollBtn.addEventListener("click", scrollToBottom);
+
+  // ✅ 스크롤 시 하단 버튼 표시 여부
+  messageContainer.addEventListener("scroll", () => {
+    const isNotAtBottom =
+      messageContainer.scrollHeight - messageContainer.scrollTop >
+      messageContainer.clientHeight + 50;
+
+    scrollBtn.classList.toggle("show", isNotAtBottom);
+  });
+
+  // ✅ 시작카드 클릭 시 자동입력 + 전송
+  if (startCard) {
+    startCard.addEventListener("click", () => {
+      input.value = "시작";
+      sendBtn.click();
+    });
   }
+});
+
+function showCopiedToast() {
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.innerText = "복사됨";
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 2000);
+}
+
+document.querySelector(".share-button").addEventListener("click", () => {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    showCopiedToast(); // ✅ alert 대신 사용자 정의 토스트
+  });
+});
