@@ -1,8 +1,4 @@
 from django.shortcuts import render
-
-
-# Create your views here.
-
 from django.http import HttpResponse
 
 def index(request):
@@ -10,3 +6,12 @@ def index(request):
 
 def chat(request):
     return render(request, 'polls/chat.html')
+
+def fourpanel(request):
+    return render(request, 'polls/fourpanel.html')
+
+def memorygame(request):
+    return render(request, 'polls/memorygame.html')
+
+def otherusers(request):
+    return render(request, 'polls/otherusers.html')
