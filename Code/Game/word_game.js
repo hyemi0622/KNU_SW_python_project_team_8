@@ -11,7 +11,7 @@ const directions = [
   { dr: 1, dc: 1 }
 ];
 
-// JSON 불러오기
+
 fetch("/static/data/word_game_levels.json")
   .then(res => res.json())
   .then(data => { levels = data; });
@@ -21,7 +21,7 @@ function startGame(levelNum) {
   const level = levels.find(l => l.level === levelNum);
   boardSize = level.size;
 
-  // ✅ 단어 무작위 추출
+  
   const shuffled = level.words.sort(() => Math.random() - 0.5);
   const wordCount = Math.min(level.words.length, getRandomInt(3, level.words.length));
   words = shuffled.slice(0, wordCount);
