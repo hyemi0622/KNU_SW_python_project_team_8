@@ -41,7 +41,7 @@
         "radius": 30
       },
       {
-        "name": "호주 깃발",
+        "name": "호주 국기",
         "xRange" : {"min":112, "max":170},
         "yRange" : {"min":281, "max":296},
         "radius": 30
