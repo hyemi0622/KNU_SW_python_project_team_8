@@ -21,4 +21,4 @@
 
 #### ⚙️ 혜민 <br>
 
-[![game](https://img.shields.io/badge/%20Wen%20Design-41423c)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/Code/Game/Code)
+[![game]](https://github.com/hyemi0622/KNU_SW_python_project_team_8/Code/Game/Code)
