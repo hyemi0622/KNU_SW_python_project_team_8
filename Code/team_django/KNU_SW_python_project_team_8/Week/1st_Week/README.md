@@ -1,0 +1,30 @@
+### 📝 회의 일시 : 4/28 (월) 4시30분
+
+⚙️ 혜민: 게임 형식 조사해오기.<br>
+🔧 가령:  기능 명세서 대략 작성해오기. (라이브러리 공부ing)<br>
+🎨 혜미: 디자인 사이트 알아오기.(html,css 공부 ing) .<br>
+
+#### 👥 회의 내용 
+
+- 기능명세서 완성
+- 디자인 tool 정하기
+- 게임 형식 정하기
+
+---
+### 🎨 혜미<br>
+
+노션 링크 : https://www.notion.so/1-1e3f45b223d18099a575e7c2e8ae8440?pvs=4
+
+---
+#### 🔧 가령 <br>
+
+노션 링크 : https://www.notion.so/1e3fab33b8988020a230f2174399257a?v=1e3fab33b89880d4b1c4000c7fa974a1&pvs=4 <br><br>
+✅ 기능 명세서 완성<br>
+
+![기능명세서](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/images/photo.png?raw=true)
+
+---
+
+#### ⚙️ 혜민 <br>
+> 숫자 게임 : https://www.arealme.com/number-memory-test/ko/ <br>
+기억력 게임 : https://www.arealme.com/memory-test/ko/
