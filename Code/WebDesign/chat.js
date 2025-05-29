@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
   // ✅ 상태 변수
   let isTyping = false;
   let selectedCategory = "";
@@ -8,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     category: "",
     responseList: []
   };
-
+document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("userInput");
   const sendBtn = document.getElementById("sendBtn");
   const intro = document.getElementById("intro");
@@ -17,7 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const scrollBtn = document.getElementById("scrollToBottom");
   const startCard = document.getElementById("startCard");
 
+  function scrollToBottom() {
+  const messageContainer = document.getElementById("chatMessages");
+  if (messageContainer) {
+    messageContainer.scrollTo({
+      top: messageContainer.scrollHeight,
+      behavior: "smooth"
+    });
+  }
+}
+window.scrollToBottom = scrollToBottom;  // 이 줄 추가!
   function sendMessage() {
+    console.log("currentQuestionIndex:", currentQuestionIndex, "followupQuestions.length:", followupQuestions.length);
   const message = input.value.trim();
 
   if (message === "" || isTyping) {
@@ -40,44 +50,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ✅ '시작' 입력 시 버튼 포함한 카테고리 안내
   if (message === "시작") {
-    isTyping = true;
-    sendBtn.innerHTML = `<span class="square-dot"></span>`;
+  isTyping = true;
+  sendBtn.innerHTML = `<span class="square-dot"></span>`;
 
-    const aiMsg = document.createElement("div");
-    aiMsg.className = "message ai typing";
-    aiMsg.innerHTML = `<span class="ai-typing-indicator">●</span>`;
-    messagesInner.appendChild(aiMsg);
+  // 1. 타이핑 인디케이터
+  const aiMsg = document.createElement("div");
+  aiMsg.className = "message ai typing";
+  aiMsg.innerHTML = `<span class="ai-typing-indicator">●</span>`;
+  messagesInner.appendChild(aiMsg);
+  scrollToBottom();
+
+  setTimeout(() => {
+    // 2. 안내문 텍스트로 교체 (점 위치와 정확히 일치)
+    aiMsg.classList.remove("typing");
+    aiMsg.innerHTML = `찾고 싶은 기억을 선택해주세요. 🧠`;
+    aiMsg.classList.add("first-question"); // 필요시
+
+    // 3. 버튼 묶음은 별도의 .message.ai div로 추가 (아래에 붙음)
+    const btnDiv = document.createElement("div");
+    btnDiv.className = "message ai first-question";
+    btnDiv.innerHTML = `
+      <div class="category-buttons">
+        <button onclick="selectCategory(1)">1. 장소</button>
+        <button onclick="selectCategory(2)">2. 일정/할일</button>
+        <button onclick="selectCategory(3)">3. 단어/문장</button>
+        <button onclick="selectCategory(4)">4. 콘텐츠</button>
+        <button onclick="selectCategory(5)">5. 노래</button>
+        <button onclick="selectCategory(6)">6. 검색</button>
+      </div>
+    `;
+    messagesInner.appendChild(btnDiv);
+
     scrollToBottom();
 
-    setTimeout(() => {
-      aiMsg.classList.remove("typing");
-      aiMsg.innerHTML = `
-        찾고 싶은 기억을 선택해주세요. 🧠
-        <div class="category-buttons">
-          <button onclick="selectCategory(1)">1. 장소/경험</button>
-          <button onclick="selectCategory(2)">2. 일정/할일</button>
-          <button onclick="selectCategory(3)">3. 단어</button>
-          <button onclick="selectCategory(4)">4. 콘텐츠</button>
-          <button onclick="selectCategory(5)">5. 꿈</button>
-        </div>
-      `;
-      scrollToBottom();
-      isTyping = false;
-      sendBtn.innerHTML = "↑";
-    }, 3200);
+    isTyping = false;
+    sendBtn.innerHTML = "↑";
+  }, 3200);
 
-    return;
-  }
+  return;
+}
+
+
 
   
   // ✅ 숫자 1~5 입력으로 카테고리 선택
-  if (!selectedCategory && /^[1-5]$/.test(message)) {
+  if (!selectedCategory && /^[1-6]$/.test(message)) {
     const categoryMap = {
-      1: "장소/경험",
+      1: "장소",
       2: "일정/할일",
-      3: "단어",
+      3: "단어/문장",
       4: "콘텐츠",
-      5: "꿈"
+      5: "노래",
+      6: "검색"
     };
     selectedCategory = categoryMap[message];
     startQuestions(selectedCategory);
@@ -102,12 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => input.classList.remove("shake"), 300);
   }
 
-  function scrollToBottom() {
-    messageContainer.scrollTo({
-      top: messageContainer.scrollHeight,
-      behavior: "smooth"
-    });
-  }
 
   sendBtn.addEventListener("click", sendMessage);
   input.addEventListener("keydown", (e) => {
@@ -163,56 +181,39 @@ document.querySelector(".share-button").addEventListener("click", () => {
 const questionBank = {
   1: [
     "그 장소는 실내였나요, 실외였나요?",
-    "혼자 있었나요, 누군가와 함께였나요?",
-    "그 장소에서 무슨 활동을 했나요?",
-    "기억나는 색깔이나 물건이 있나요?",
-    "계절이나 날씨가 어땠는지 기억나나요?",
-    "그 장소에서 들렸던 소리가 있나요?",
-    "냄새나 향기가 기억나나요?",
-    "장소 근처에 건물이나 지형지물이 있었나요?",
-    "그 장소에서 무언가를 먹었거나 마셨나요?",
-    "특정 시간대(아침/점심/저녁/밤)였나요?",
-    "그 기억과 관련된 인물은 누구인가요?",
-    "당시 당신의 나이는 대략 몇 살이었나요?",
+    "그 장소에 도착했을 때 먼저 보였던 게 무엇인가요? ( 문, 간판, 사람, 불빛 등)",
+    "그 장소를 냄새로 표현한다면 어떤 냄새인가요?",
+    "그 장소에서 걷고 있었나요? 앉아 있었나요? 누워 있었나요?",
+    "그 장소에서 마지막으로 했던 행동은 뭐였나요? ( 인사하기, 계산하기, 사진 찍기 등)",
+    "그 장소는 어느 나라에 있나요?",
+    "그 장소는 어느 지역에 있나요? ( 울산, 서울, 대구 등)",
+    "그 장소에 사람들이 많이 모여있었나요?",
     "지금 그 기억을 떠올리면 어떤 감정이 드나요?",
-    "이 기억을 되찾고 싶은 이유는 무엇인가요?"
+    "그 장소에서 특별히 기억나는 소리가 있나요?",
+    "그 장소에 함께 있었던 사람이 누구인가요? (연인, 친구, 가족, 혼자 등)",
+    "그 장소 주변에 유명한 랜드마크나 건물이 있나요?(이름도 알려주세요)",
+    "그 장소에서 주로 사용하는 교통수단이 무엇이 있나요?",
+    "그 장소에 주로 어떤 활동을 하러 가나요?(음악 감상, 만들기 등등)"
   ],
   2: [
-    "어떤 일정의 시간대인가요?(아침/오후/저녁/밤 중에서)",
-    "오늘 예정된 약속이나 일정이 있었나요?",
+    "그 일정의 시간대가 기억나시나요?(아침/오후/저녁/밤 중에서)",
+    "그 일정은 '해야만 하는' 일인가요, 아니면 '하고 싶은' 일이었나요?",
     "해당 일정은 어떤 종류였나요?→ (수업 / 과제 / 회의 / 식사약속 / 여행 / 알바 / 기타)",
-    "과제 일정이면 팀원이 있었나요? 누구였나요?",
-    "해당 일정의 시작 시간이나 마감일이 있었나요?",
+    "누구와 잡은 일정인가요??(친구, 가족, 혼자 등등)",
+    "최근에 알림, 캘린더, 노션, 종이 메모 등에서 알림이 왔는데 무시한 적이 있나요?",
     "그 일정에 대해 가장 최근에 얘기한 적 있나요? 어떤 내용이었나요?",
     "그 일정과 관련된 자기관리 계획이 있었나요? (예: 목표, 루틴, 리마인더 등)",
-    "일정 전에 어떤 일이 있었나요? 혹은 직전에 어떤 대화를 나눴나요?",
-    "그 일정은 평소의 루틴과 달랐던 점이 있었나요?",
-    "학교, 회사, 알바 , 기타  중 어디에 해당하나요? [체크리스트]",
-    "학교 이름이나 위치가 기억나시나요?",
-    "내일 수업이 있나요? 있다면 과목명은?",
-    "해당 수업은 전공과 관련 있나요?",
-    "동아리 활동이 있었거나 예정되어 있었나요? 동아리 이름은요?",
-    "회사에서 맡은 일은 무엇이었나요?",
-    "상사 이름이나 동료 이름이 기억나시나요?",
-    "일과 중 사용했던 도구나 소프트웨어가 기억나나요?",
-    "사무실이나 회의실 위치, 풍경이 기억나나요?",
-    "알바하는 곳의 이름은?",
-    "알바에서 맡은 일은 어떤 거였나요?",
-    "정기적으로 일하는 요일이나 시간대가 있나요?",
-    "출퇴근은 어떤 방식으로 했나요? (도보, 버스, 자차 등)",
-    "이 일정은 어떤 특별한 목적이 있었나요? (기념일, 약속, 생일 등)",
-    "일정이 있던 장소나 경로가 기억나나요?",
-    "이 일정은 갑작스럽게 생긴 건가요, 미리 계획된 건가요?",
-    "관련 키워드 뭐든지 입력해주세요."
+    "누군가 요즘 “너 그거 챙겼어?” “까먹지 말고~” 같은 말을 한 기억이 있나요?",
+    "평소 같으면 이쯤에 정기적으로 있는 일정이 있었나요?",
+    "학교, 회사, 알바 , 기타 중 어디에 해당하나요?"
   ],
   3: [
-    "한국어였나요, 외국어였나요?",
     "어떤 상황에서 그 단어를 사용하나요?",
-    "반대되는 단어가 떠오르나요?",
+    "한국어였나요, 외국어였나요?",
     "그 단어가 고유 명사,속담, 고사성어 중에 어떤 종류 인가요?",
-    "가장 자주 사용하는 어플리케이션 이름은?",
-    "지금 떠오르는 단어 중 비슷하지만 아닌게 뭐가 있어?",
-    "그 단어는 명사, 동사, 형용사 중 어떤 품사였나요?",
+    "그 단어를 사용할 때 기분이나 감정은 어땠나요?",
+    "지금 떠오르는 단어 중 비슷하지만 아닌게 있나요?",
+    "그 단어는 명사, 동사, 형용사 중 어떤 품사였나요? 아니면 문장 자체였나요?",
     "누군가가 자주 썼던 말인가요? 그렇다면 누구인가요?",
     "뉴스, 책, 영화 중 어디서 접했던 단어였나요?",
     "그 단어의 첫 글자나 음절이 기억나나요?",
@@ -220,108 +221,66 @@ const questionBank = {
     "단어를 들었을 때 머릿속에 어떤 이미지가 떠오르나요?",
     "해당 단어는 일상적인가요, 아니면 특정 분야(예: 법, IT, 의학 등)의 전문용어인가요?",
     "그 단어를 써야 하는데 비슷한 다른 단어로 대체했던 적 있나요?",
-    "사전에서 찾아봤던 기억이 있나요? 어떤 앱이나 도구를 썼나요?"
+    "그 단어를 마지막으로 썼거나 들었던 장소나 상황은 어디였나요?"
   ],
   4: [
-    "어떤 장르였나요? (예: 액션, 로맨스, 스릴러, 느와르 등)",
-    "등장하는 배우 이름이 기억나나요?",
-    "영화의 방영 연도는 언제쯤인가요?",
-    "어느 나라에서 제작된 영화인가요?",
-    "당시에 관객 수나 인기 정도가 기억나시나요?",
-    "영화에서 가장 기억에 남는 장면이 있었나요?",
-    "영화의 OST나 배경음이 떠오르시나요?",
-    "감독이나 제작사 정보가 기억나시나요?",
-    "이 영화를 누구와 함께 보셨나요?",
-    "영화 속 장소나 배경이 현실의 어떤 장소와 비슷했나요?",
-    "영화에서 등장한 특정 물건이나 대사 기억나세요?",
-    "해당 영화를 보고 난 후 어떤 기분이었나요?",
-    "영화와 관련된 키워드가 있다면 무엇인가요?",
-    "이 영화를 처음 접한 경로는? (극장, OTT, TV 등)",
+     "영화,드라마, 애니메이션, 책 중 어느 것이 적어주세요.",
+    "어떤 장르였나요? (예: 액션, 로맨스, 공포, 범죄 등)",
+    "등장하는 배우 또는 성우 이름이 기억나나요? 주연,조연 가리지 말고 전부 적어주세요.",
+    "방영 연도는 언제쯤인가요? (예: 2010~2014년 사이)",
+    "어느 나라에서 제작된 작품인가요?",
+    "당시에 관객 수나 인기 정도가 기억나시나요? (예: 100만 미만)",
+    "작품에서 가장 기억에 남는 장면이 있었나요? 주연,조연 가리지 말고 전부 적어주세요.",
+    "이 작품를 처음 접한 경로는? (극장, OTT, TV, 유튜브 광고 등)",
+    "등장인물의 캐릭터 이름이 기억 나시나요?",
+    "배경이 현실인가요? 판타지인가요? Q12 작품 속 등장한 장소를 생각 나는 대로 전부 적어주세요. (예: 교도소,학교 , 카페, 항구..)",
+    "작품에서 등장한 대사가 기억나세요?",
+    "작가,감독,제작사 중에 아는 것이 있으시면 적어주세요.",
+    "작품의 결말이 기억 나시나요?(예: 주인공이 희생함.)",
+  ],
+  5: [
     "노래의 장르는 무엇인가요? (발라드, 힙합, 팝송,트로트 등)",
     "그룹인가요? 솔로 인가요?",
-    "가수 이름이 기억나시나요?",
-    "가사의 일부가 기억나시나요?",
+    "그룹이나 가수의 이름을 적어주세요.",
+    "가사의 일부가 무엇인가요?",
     "노래가 나왔던 시기가 언제쯤인가요?",
     "어디서 이 노래를 자주 들으셨나요?",
     "노래방 인기차트에서 본 적 있나요?",
     "노래와 관련된 특정 사람이나 장소가 기억나나요?",
     "노래에 챌린지가 있나요?",
-    "질문 하시는 분은 몇년생이신가요?",
-    "뮤직비디오의 이미지가 떠오르시나요?",
+    "노래 제목이 한글인가요,영어인가요, 둘 다인가요?",
+    "노래의 후렴구 멜로디가 입에 맴돌거나 흥얼거리게 되었나요?",
     "관련된 키워드가 있다면 무엇인가요?",
     "유사한 노래가 있다면 어떤 곡인가요?",
     "해당 노래는 앨범의 타이틀곡이었나요?",
-    "등장하는 배우 이름이 기억나나요?",
-    "주인공의 이름이나 직업이 떠오르시나요?",
-    "드라마의 방영 연도는 대략 언제였나요?",
-    "드라마는 한국 드라마였나요, 외국 드라마였나요?",
-    "드라마의 주 장르가 무엇이었나요? (로맨스, 스릴러, 시대극 등)",
-    "드라마를 본 플랫폼은 어디였나요? (TV, 넷플릭스, 웨이브 등)",
-    "당시 이 드라마가 화제였나요? 친구들과 이야기 나눈 적 있나요?",
-    "드라마 속 인상적인 장소나 배경이 기억나나요?",
-    "등장인물 중 누구에게 감정이입을 많이 하셨나요?",
-    "기억에 남는 OST나 음악이 있었나요?",
-    "주요 사건이나 반전 장면이 기억나시나요?",
-    "드라마 속에서 인상적인 복장이나 아이템이 있었나요?",
-    "드라마의 엔딩이 해피엔딩이었나요, 세드엔딩이었나요?",
-    "드라마 속 인물의 말투나 성격이 기억에 남나요?",
-    "방영 플랫폼은 어디였나요? (예: 넷플릭스, 애니플러스, 유튜브 등)",
-    "애니메이션의 인기도를 1~5로 매긴다면?",
-    "유명한 성우의 목소리가 기억나나요?",
-    "애니의 장르는 무엇이었나요? (액션, 로맨스, 일상, 판타지 등)",
-    "애니의 주인공 이름이나 생김새가 떠오르나요?",
-    "오프닝/엔딩 노래가 기억나나요?",
-    "배경이 현실 세계였나요, 판타지 세계였나요?",
-    "애니를 어디서 보셨나요? (집, 학교, PC방 등)",
-    "친구나 가족과 함께 본 적 있나요?",
-    "극장판 애니메이션이었나요, TV 시리즈였나요?",
-    "명장면이나 눈물 나는 장면이 있었나요?",
-    "캐릭터 중 누구를 가장 좋아했나요?",
-    "이 애니는 추천을 받았나요, 우연히 보게 되었나요?",
-    "지금 다시 보면 어떤 감정이 들 것 같나요?"
-  ],
-  5: [
-    "어떤 장소였나요? (예: 학교, 병원, 미로, 바다 등)",
-    "꿈속에 자신 말고 누가 있었나요?",
-    "시간대는 밤이었나요? 낮이었나요?",
-    "특별한 소리나 음악이 들렸나요?",
-    "꿈속에서 감정이 강하게 느껴졌나요? (공포, 기쁨, 혼란 등)",
-    "말이 통했나요, 아니면 소리 없이 상황이 진행됐나요?",
-    "현실에서와는 다르게 행동했나요?",
-    "꿈에서 도망치거나 쫓겼던 적이 있나요?",
-    "이 꿈을 누군가에게 말해본 적이 있나요?",
-    "현실에서는 불가능한 일이 일어났나요?",
-    "동물이나 괴물 같은 존재가 등장했나요?",
-    "꿈속에서 특정 냄새가 났던 기억이 있나요?",
-    "꿈이 끝나는 장면이 기억나나요?",
-    "깨고 난 뒤 어떤 기분이었나요?"
   ],
   6: [
-    "이 기억은 어떤 감정에서 시작되었나요?",
-    "머릿속에 첫 이미지로 떠오르는 장면은 무엇인가요?",
-    "관련된 소리나 배경음이 떠오르나요?",
-    "냄새나 촉감 같은 감각적인 정보가 있나요?",
-    "기억과 관련된 사람의 얼굴이나 이름이 기억나나요?",
-    "최근에 비슷한 경험이 있었나요?",
-    "스마트폰이나 PC, 캘린더, 메모장, 사진첩에 단서가 있었나요?",
-    "그 일이 계절적으로 언제쯤이었나요?",
-    "공간적으로 실내였나요, 실외였나요?",
-    "당시 입었던 옷이나 날씨가 기억나나요?",
-    "특별한 물건이나 상징이 있었나요?",
-    "관련 키워드를 자유롭게 말해본다면?",
-    "그 기억이 떠오르면 신체 반응(눈물, 소름 등)이 있나요?",
-    "지금 떠오른 어떤 단서라도 자유롭게 말해볼래요?"
+    "검색하기 직전에 어떤 일을 하고 있었어?",
+    "이동 중이였어? 컴퓨터 앞에 앉아 있었어? (장소를 말해주세요)",
+    "검색하려던 건 어떤 주제 였나요?",
+    "그때 머릿속에 떠오른 단어나 이미지가 있나요?",
+    "지금 검색하는 장소가 어딘가요?",
+    "이 기억을 찾고 그 후에 하려던 일이나 일정이 기억나나요?",
+    "검색 전에 연락하고 있었나요? 누구와 어떤 연락을 하고 있었나요?",
+    "소비와 관련 있었나요?(쇼핑, 외식 , 주식,...)",
+    "검색 하려던게 사실을 확인 하려던 건가요? ( 루머나 정보 검증 )",
+    "검색하려던 단어의 일부라도 생각 나시나요?",
+    "검색 하려던게 주변 사람에 의해 부탁 받은 일인가요?",
+    "비슷한 말 떠오르는 거 아무거나 말해주세요.",
+    "하고 있던 과제나 일이 있다면 어떤 내용인가요?",
+    "검색하려는 당시의 기분을 적어주세요."
   ]
 };
 
 
 async function fetchQuestions(category) {
   const reverseCategoryMap = {
-    "장소/경험": 1,
+    "장소": 1,
     "일정/할일": 2,
-    "단어": 3,
+    "단어/문장": 3,
     "콘텐츠": 4,
-    "꿈": 5
+    "노래": 5,
+    "검색": 6
   };
   const key = reverseCategoryMap[category.trim()];
   console.log("선택된 category:", category);
@@ -341,19 +300,47 @@ async function startQuestions(category) {
 }
 
 function showNextQuestion() {
+
+  console.log("currentQuestionIndex:", currentQuestionIndex);
+  console.log("followupQuestions:", followupQuestions);
+  console.log("followupQuestions.length:", followupQuestions.length);
+
+  const input = document.getElementById("userInput");
+  const sendBtn = document.getElementById("sendBtn");
+
   if (currentQuestionIndex >= followupQuestions.length) {
+    console.log("질문 끝! submitAnswers로 이동");
     submitAnswers();
     return;
   }
-
+  isTyping = true;
+  input.disabled = false;
+  sendBtn.disabled = true;
+  sendBtn.innerHTML = `<span class="square-dot"></span>`; 
   const q = followupQuestions[currentQuestionIndex];
-  const botDiv = document.createElement("div");
-  botDiv.className = "message ai";
-  botDiv.innerText = q;
+  console.log("이번에 출력할 질문:", q);
   const messagesInner = document.getElementById("messagesInner");
-  messagesInner.appendChild(botDiv);
+
+  // 1. typing indicator 추가
+  const typingDiv = document.createElement("div");
+  typingDiv.className = "message ai typing";
+  typingDiv.innerHTML = `<span class="ai-typing-indicator">●</span>`;
+  messagesInner.appendChild(typingDiv);
   scrollToBottom();
+
+  // 2. 잠시 후 질문으로 교체
+  setTimeout(() => {
+    typingDiv.classList.remove("typing");
+    typingDiv.innerText = q;
+    scrollToBottom();
+    isTyping = false;
+    input.disabled = false;
+    sendBtn.disabled = false;
+    sendBtn.innerHTML = "↑";
+    input.focus();
+  }, 1800);
 }
+
 
 function submitAnswers() {
   const doneMsg = document.createElement("div");
