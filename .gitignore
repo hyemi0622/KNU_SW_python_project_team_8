@@ -1,0 +1,21 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+
+
+
+#환경변수 _ openAPI키가 있어서 git에 올리면 안됨. 
+
+
+# Python
+__pycache__/
+*.py[cod]
+
+# 가상환경
+.venv/
+venv/
+Code/team_django/venv/
+
+# 환경변수
+.env
+
+# Django DB
+db.sqlite3

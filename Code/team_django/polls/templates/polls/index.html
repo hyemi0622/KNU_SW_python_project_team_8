@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -31,10 +32,10 @@
       <div class="navbar-left">
         <div class="logo">Moji</div>
         <div class="navbar-menu">
-          <a href="{% url 'fourpanel' %}"><button>What is?</button></a> 
-          <a href="{% url 'memorygame' %}"><button>Memory Game</button></a> 
-          <a href="{% url 'otherusers' %}"><button>Remember Other Users</button></a> 
-          <a href="{% url 'fourpanel' %}"><button>Meet The Team</button></a> 
+          <button>What is?</button>
+          <button>Memory Game</button>
+          <button>Four-panel Comic</button>
+          <button>Remember Other Users</button>
         </div>
       </div>
 
@@ -55,11 +56,13 @@
         Let’s bring your story back—together.<br>
       </p>
       <a href="{% url 'chat' %}">
-      <button class="explore-btn">Find Your Memory</button>
-    </a>
-</a></div>
+        <button class="explore-btn">Find Your Memory</button>
+      </a>
+      
+      
+      </div>
     <div class="hero-right">
-      <img src="{% static 'images/moji.png' %}" alt="Moji 로고" />
+      <img src="{% static 'images/image1.png' %}" alt="Character" />
     </div>
   </section>
 
