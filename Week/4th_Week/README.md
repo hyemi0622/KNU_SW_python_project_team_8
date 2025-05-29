@@ -7,6 +7,7 @@
 #### 👥 회의 내용 
 
 - 각자 개발한 내용 연결 짓기
+- 템플릿 수정
 ---
 ### 🎨 혜미<br>
 
@@ -21,4 +22,3 @@
 
 #### ⚙️ 혜민 <br>
 
-[![game]](https://github.com/hyemi0622/KNU_SW_python_project_team_8/Code/Game/Code)
