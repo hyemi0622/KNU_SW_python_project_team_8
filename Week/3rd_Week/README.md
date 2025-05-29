@@ -19,5 +19,6 @@
 ---
 
 #### ⚙️ 혜민 <br>
+[![game](https://img.shields.io/badge/%20Game-41423c)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/Code/Game/Code)
 
 숨은그림 찾기, 퍼즐에 나열된 단어 찾기
