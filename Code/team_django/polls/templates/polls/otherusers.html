@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>기억 카드 흐름 3줄</title>
+  <link rel="stylesheet" href="{% static 'css/otherusers.css' %}" />
+</head>
+<body>
+  <header class="gray-section">The Memories Of Others</header>
+  <a href="{% url 'index' %}" style="all: unset; position: fixed; top: 24px; left: 24px; font-size: 19px; font-weight: 600; color: #111; background: transparent; cursor: pointer;">←   </a>
+<footer class="moji-footer">
+  <div class="footer-content">
+    <a href="{% url 'index' %}">
+  <img src="{% static 'images/logo.png' %}" alt="Moji Logo" class="footer-logo" />
+</a>
+    <div class="footer-text">
+      <p>Wander through the memories of others, let them stir something within you.<br>— Your own might return in a whisper.</p>
+      <div class="footer-buttons">
+        <a href="{% url 'chat' %}" class="start-button">Find Your Memory ↗</a>
+      </div>
+    </div>
+  </div>
+</footer>
+  <main class="card-flow-wrapper">
+    <div class="card-row row-1"></div>
+    <div class="card-row row-2"></div>
+    <div class="card-row row-3"></div>
+    <div class="card-row row-4"></div> 
+  </main>
+
+  <div id="cardModal" class="modal">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <h2 id="modalTitle"></h2>
+    <p id="modalBody"></p>
+  </div>
+</div>
+
+  <script src="{% static 'js/otherusers.js' %}"></script>
+</body>
+</html>
