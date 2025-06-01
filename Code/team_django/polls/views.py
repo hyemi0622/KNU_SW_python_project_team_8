@@ -23,6 +23,18 @@ def index(request):
 def chat(request):
     return render(request, 'polls/chat.html')
 
+def fourpanel(request):
+    return render(request, 'polls/fourpanel.html')
+
+def memorygame(request):
+    return render(request, 'polls/memorygame.html')
+
+def otherusers(request):
+    return render(request, 'polls/otherusers.html')
+
+def meetourteam(request):
+    return render(request, 'polls/meetourteam.html')
+
 
 @csrf_exempt
 def get_followup_questions(request):
