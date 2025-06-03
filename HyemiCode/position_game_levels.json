@@ -1,0 +1,69 @@
+[
+  {
+    "level": 1,
+    "background": "images/position_bg_level1.png",
+    "targets": [
+      {
+        "name": "공",
+        "xRange" : {"min":70, "max":116},
+        "yRange" : {"min":107, "max":134},
+        "radius": 30
+      },
+      {
+       
+        "name": "호주 지도",
+        "xRange" : {"min":670, "max":773},
+        "yRange" : {"min":465, "max":503},
+        "radius": 30
+      },
+      {
+        "name": "슬리퍼",
+        "xRange" : {"min":445, "max":494},
+        "yRange" : {"min":32, "max":65},
+        "radius": 30
+      },
+      {
+        "name": "부메랑",
+        "xRange" : {"min":586, "max":650},
+        "yRange" : {"min":345, "max":359},
+        "radius": 30
+      },
+      {
+        "name": "긴 부채",
+        "xRange" : {"min":556, "max":614},
+        "yRange" : {"min":185, "max":219},
+        "radius": 30
+      },
+      {
+        "name": "서핑 보드",
+        "xRange" : {"min":718, "max":746},
+        "yRange" : {"min":321, "max":364},
+        "radius": 30
+      },
+      {
+        "name": "호주 국기",
+        "xRange" : {"min":112, "max":170},
+        "yRange" : {"min":281, "max":296},
+        "radius": 30
+      },
+      {
+        "name": "물고기1",
+        "xRange" : {"min":87, "max":137},
+        "yRange" : {"min":336, "max":357},
+        "radius": 30
+      },
+      {
+        "name": "물고기2",
+        "xRange" : {"min":330, "max":356},
+        "yRange" : {"min":165, "max":200},
+        "radius": 30
+      },
+      {
+        "name": "럭비공",
+        "xRange" : {"min":222, "max":264},
+        "yRange" : {"min":347, "max":369},
+        "radius": 30
+      }
+    ]
+  }
+]

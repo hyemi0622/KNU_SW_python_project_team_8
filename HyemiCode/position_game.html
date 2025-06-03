@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>위치 기억 게임</title>
+  <style>
+    canvas {
+      border: 2px solid #000;
+      display: block;
+      margin: 20px auto;
+    }
+    .found-item {
+      margin: 5px;
+      padding: 5px 10px;
+      display: inline-block;
+      border-radius: 5px;
+      background: #eee;
+    }
+    .found {
+      background: lightgreen;
+      font-weight: bold;
+    }
+    #targetList {
+      text-align: center;
+      margin-top: 20px;
+    }
+    #clearMessage {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-top: 20px;
+      color: #007bff;
+    }
+  </style>
+
+  
+  <script defer src="/static/js/position_game.js"></script>
+</head>
+<body>
+
+  <h2 style="text-align:center;"> 위치 기억 게임</h2>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+  <div id="targetList"></div>
+  <div id="clearMessage"></div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1200">
+  <title>Hwo Make This</title>
+  <link rel="stylesheet" href="{% static 'css/meetourteam.css' %}">
+</head>
+<body>
+  <section class="why-section">
+  <a href="{% url 'index' %}" style="all: unset; position: fixed; top: 24px; left: 24px; font-size: 19px; font-weight: 600; color: #111; background: transparent; cursor: pointer;">←</a>
+
+  <!-- ✨ 새로운 래퍼 추가 -->
+  <div class="why-wrapper">
+    <div class="why-left">
+      <div class="why-title">Hwo Make This?</div>
+      <div class="why-main">
+        <div>As our <span class="highlight">final project</span></div>
+        <div>for the <span class="highlight">Python</span> course,</div>
+        <div>we created an <span class="highlight">AI called Moji.</span></div>
+      </div>
+      <div class="why-desc"><a href="{% url 'chat' %}"><button class="start-btn">Try it now  → </button></a>
+      </div>
+      <div class="why-bg-text">Moji —<br>AI agent</div>
+    </div>
+
+    <div class="slider-container">
+      <div class="slider" id="slider">
+        <!-- 카드들 -->
+        <div class="card">
+          <div class="card-title">Ko Hye Min</div>
+          <div class="card-desc">2023008036 Software<br>Kyungpook National University<br><br>
+          ∙ Game Backend <br>∙ HTML & JavaScript<br><br>∙ Introduction to Django<br>∙ Integration with MySQL database<br>∙ Game design and planning <br>&nbsp;&nbsp;and implemented with JavaScript </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Kim Ga Ryeong</div>
+          <div class="card-desc">2023027213 Software<br>Kyungpook National University<br><br>
+            ∙ Library & Data-driven Backend<br>∙ PYTHON<br><br>∙ Developed backend with Django <br>∙ designed database models <br>∙ integrated OpenAI API <br>∙ deployed the project <br> &nbsp;&nbsp;using an AWS EC2 instance </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Jeong Hye Mi</div>
+          <div class="card-desc">2023025757 Software<br>Kyungpook National University<br><br>
+            ∙ Design & Web Backend<br>∙ HTML & CSS & JavaScript<br><br>∙ Designed and implemented<br> &nbsp;&nbsp;dynamic web pages <br>∙ Structured and styled all <br>&nbsp;&nbsp;client-side components<br>∙ Combined all code into a unified <br>&nbsp;&nbsp;web interface </div>
+        </div>
+      </div>
+
+      <div class="dot-indicator">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+</section>
+  <script src="{% static 'js/meetourteam.js' %}"></script>
+</body>
+</html>

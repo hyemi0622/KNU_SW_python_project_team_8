@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Memory Game 선택</title>
+  <style>
+    body, html {
+      width: 100%;
+      height: 100%;
+      font-family: 'Pretendard', sans-serif;
+      background: #f5f6fa;
+      margin: 0;
+      padding: 0;
+    }
+    .select-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      gap: 48px;
+      padding-bottom: 60px;
+    }
+    .select-card {
+      border-radius: 32px;
+      position: relative;
+      background: linear-gradient(160deg, #cfcfcf 60%, #ffffff 100%);
+      box-shadow: 0 8px 32px rgba(60,60,100,0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.22s cubic-bezier(.4,2,.6,1), box-shadow 0.22s;
+      text-decoration: none;
+      z-index: 1;
+      overflow: visible;
+    }
+    .select-card:hover {
+      transform: translateY(-14px) scale(1.04);
+      box-shadow: 0 16px 48px rgba(60,60,100,0.22);
+      z-index: 2;
+    }
+    /* 카드별 컬러 */
+    .select-card.left {
+      background: linear-gradient(160deg, #6a5acd 60%, #b9a6f7 100%);
+      width: 240px;
+      height: 320px;
+    }
+    
+    .select-card.center {
+      background: linear-gradient(160deg, #20b2aa 60%, #99e2dd 100%);
+      width: 240px;
+      height: 280px;
+      bottom : -10px;
+    }
+
+    .select-card.right {
+      background: linear-gradient(160deg, #6a5acd 60%, #b9a6f7 100%);
+      width: 240px;
+      height: 320px;
+    }
+    /* 캐릭터 원형 영역 */
+    .character-circle {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 4px 16px rgba(60,60,100,0.13);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      border: 6px solid #f5f6fa;
+    }
+    .character-img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      /* 실제 캐릭터 PNG로 교체 가능 */
+    }
+    .select-title {
+      margin-top: 80px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.13);
+      text-align: center;
+    }
+    .select-desc {
+      margin-top: 10px;
+      font-size: 1.05rem;
+      color: #f3f3f3;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.10);
+      text-align: center;
+      min-height: 44px;
+      margin-bottom: 16px;
+      padding: 0 10px;
+    }
+    .select-btn {
+      background: #fff;
+      color: #6a5acd;
+      border: none;
+      border-radius: 16px;
+      padding: 10px 32px;
+      font-size: 1.08rem;
+      margin-bottom: 32px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(60,60,100,0.10);
+      transition: background 0.2s, color 0.2s;
+    }
+    .select-card.center .select-btn {
+      color: #20b2aa;
+    }
+    .select-card.left .select-btn {
+      color: #6a5acd;
+    }
+    .select-card.right .select-btn {
+      color: #6a5acd;
+    }
+    /* --- 모션/설명 오버레이 --- */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .motion-card {
+      background: #fff;
+      border-radius: 32px;
+      width: 350px;
+      height: 420px;
+      box-shadow: 0 12px 48px rgba(60,60,100,0.16);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: pop 0.5s cubic-bezier(.4,2,.6,1);
+      position: relative;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.7); opacity: 0; }
+      80% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .motion-icon {
+      font-size: 110px;
+      margin-bottom: 18px;
+    }
+    .motion-title {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .motion-desc {
+      font-size: 1.2rem;
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+      animation: fadeInUp 0.8s;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .motion-timer {
+      font-size: 1.1rem;
+      color: #888;
+      margin-top: 18px;
+      animation: fadeIn 1s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0;}
+      to { opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <div class="select-container">
+    <div class="select-card left" data-game="word">
+      <div class="character-circle">
+        <img class="character-img" src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" alt="Word Game">
+      </div>
+      <div class="select-title">단어찾기 게임</div>
+      <div class="select-desc">영어 단어를 찾으며<br>어휘력을 키워보세요!</div>
+      <div class="select-btn">선택</div>
+    </div>
+    <div class="select-card center" data-game="word">
+      <div class="character-circle">
+        <img class="character-img" src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" alt="Word Game">
+      </div>
+      <div class="select-title">단어찾기 게임</div>
+      <div class="select-desc">영어 단어를 찾으며<br>어휘력을 키워보세요!</div>
+      <div class="select-btn">선택</div>
+    </div>
+    <div class="select-card right" data-game="position">
+      <div class="character-circle">
+        <img class="character-img" src="https://cdn-icons-png.flaticon.com/512/3062/3062636.png" alt="Position Game">
+      </div>
+      <div class="select-title">위치 기억하기 게임</div>
+      <div class="select-desc">카드의 위치를 기억해<br>기억력과 공간지각력을 키워보세요!</div>
+      <div class="select-btn">선택</div>
+    </div>
+  </div>
+  <!-- 설명 모션 오버레이 -->
+  <div class="overlay" id="overlay">
+    <div class="motion-card" id="motionCard">
+      <div class="motion-icon" id="motionIcon"></div>
+      <div class="motion-title" id="motionTitle"></div>
+      <div class="motion-desc" id="motionDesc"></div>
+      <div class="motion-timer" id="motionTimer"></div>
+    </div>
+  </div>
+  <script>
+    // 게임별 정보
+    const gameInfo = {
+      word: {
+        icon: '<img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" style="width:90px;height:90px;">',
+        title: "단어찾기 게임",
+        desc: "화면에 제시되는 영어 단어를<br>빠르게 찾아보세요!<br>어휘력과 집중력을 키울 수 있어요.",
+        url: "{% url 'word_game' %}"
+      },
+      position: {
+        icon: '<img src="https://cdn-icons-png.flaticon.com/512/3062/3062636.png" style="width:90px;height:90px;">',
+        title: "위치 기억하기 게임",
+        desc: "카드의 위치를 기억해서<br>정확히 맞춰보세요!<br>기억력과 공간지각력을 키울 수 있어요.",
+        url: "{% url 'position_game' %}"
+      },
+      position: {
+        icon: '<img src="https://cdn-icons-png.flaticon.com/512/3062/3062636.png" style="width:90px;height:90px;">',
+        title: "위치 기억하기 게임",
+        desc: "카드의 위치를 기억해서<br>정확히 맞춰보세요!<br>기억력과 공간지각력을 키울 수 있어요.",
+        url: "{% url 'position_game' %}"
+      }
+    };
+
+    const cards = document.querySelectorAll('.select-card');
+    const overlay = document.getElementById('overlay');
+    const motionIcon = document.getElementById('motionIcon');
+    const motionTitle = document.getElementById('motionTitle');
+    const motionDesc = document.getElementById('motionDesc');
+    const motionTimer = document.getElementById('motionTimer');
+    let timer = null;
+    let countdown = 3;
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const game = card.getAttribute('data-game');
+        const info = gameInfo[game];
+        // 설명 모달에 정보 채우기
+        motionIcon.innerHTML = info.icon;
+        motionTitle.innerHTML = info.title;
+        motionDesc.innerHTML = info.desc;
+        motionTimer.innerHTML = `게임이 <b>${countdown}</b>초 뒤에 시작됩니다...`;
+        overlay.classList.add('active');
+        // 카운트다운
+        let remain = countdown;
+        timer = setInterval(() => {
+          remain--;
+          if(remain > 0) {
+            motionTimer.innerHTML = `게임이 <b>${remain}</b>초 뒤에 시작됩니다...`;
+          } else {
+            clearInterval(timer);
+            motionTimer.innerHTML = `게임을 시작합니다!`;
+            setTimeout(() => {
+              window.location.href = info.url;
+            }, 600); // 약간의 텀 후 이동
+          }
+        }, 1000);
+      });
+    });
+
+    // ESC나 overlay 클릭시 취소하고 싶으면 아래 주석 해제
+    
+    overlay.addEventListener('click', () => {
+      clearInterval(timer);
+      overlay.classList.remove('active');
+    });
+    
+  </script>
+</body>
+</html>

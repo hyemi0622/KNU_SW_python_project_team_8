@@ -1,0 +1,222 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+}
+
+.gray-section {
+  background-color: #ffffff;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 36px;
+}
+
+.card-flow-wrapper {
+  margin-top: 0;
+  position: relative;
+  background-color: white;
+  overflow: hidden;
+  height: 520px;
+}
+
+.card-row {
+  display: flex;
+  width: 200%;
+  gap: 15px; /* ✅ 카드 간격 줄임 */
+  padding: 10px 0; /* ✅ 상하 간격도 줄임 */
+  position: absolute;
+}
+
+.row-1 {
+  top: 30px;
+  animation: scroll-right 30s linear infinite;
+}
+
+.row-2 {
+  top: 145px;
+  animation: scroll-left 40s linear infinite;
+}
+
+.row-3 {
+  top: 260px;
+  animation: scroll-right 35s linear infinite;
+}
+
+.row-4 {
+  top: 375px;
+  animation: scroll-left 35s linear infinite;
+}
+
+.memory-card {
+  position: relative;
+  background-color: #f4f4f4; /* ✅ 카드 배경 연한 회색 */
+  border-radius:5px;
+  padding: 40px 35px; /* ✅ 안쪽 여백 축소 */
+  min-width: 220px;   /* ✅ 조금 더 작게 */
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06); /* ✅ 그림자 부드럽게 */
+  transition: transform 0.2s ease, opacity 0.6s ease;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+}
+.memory-id {
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  background-color: #e0e0e0;
+  color: #333;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 12px;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.memory-text {
+  text-align: center;
+}
+.memory-card:hover {
+  transform: translateY(-4px);
+}
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-38%); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(-38%); }
+  100% { transform: translateX(0); }
+}
+
+/* 흐림 효과 */
+.card-mask {
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.card-mask.left {
+  left: 0;
+  background: linear-gradient(to right, white 0%, transparent 100%);
+}
+
+.card-mask.right {
+  right: 0;
+  background: linear-gradient(to left, white 0%, transparent 100%);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+/* ✅ 모달 내용 박스 */
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 24px 30px;
+  border-radius: 12px;
+  width: 400px;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* 닫기 버튼 */
+.close-button {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#modalTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+#modalBody {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+@keyframes wave-bounce {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-20px); }
+  60%  { transform: translateY(5px); }
+  100% { transform: translateY(0); }
+}
+
+.wave-letter {
+  display: inline-block;
+  animation: wave-bounce 0.9s ease-in-out;
+  animation-iteration-count: 1;
+}
+.moji-footer {
+  margin-top: 0;
+  background-color: #ffffff;
+  padding: 60px 20px 0 0; /* 아래 여백 최소화 */
+  border-top: 1px solid #e0e0e0;
+  margin-bottom: 0;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center; 
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: nowrap; 
+}
+
+.footer-logo {
+  width: 180px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.footer-text {
+  flex: 1;
+  font-size: 14px;
+  color: #111;
+  justify-content: center;
+}
+
+.footer-text p {
+  margin: 0 0 20px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footer-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.start-button {
+  background-color: black;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 400;
+}

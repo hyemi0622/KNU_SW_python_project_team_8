@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat - Moji</title>
+  <link rel="stylesheet" href="{% static 'css/chat.css' %}" />
+</head>
+<body>
+  <button class="share-button">공유하기</button>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+          <img src="{% static 'images/logo.png' %}" alt="logo">
+      </div>
+      <a href="{% url 'chat' %}" class="chat-link">New Chat</a>
+      <a href="{% url 'memorygame' %}" class="memory-link">Memory Game</a>
+      <a href="{% url 'otherusers' %}" class="other-link">Other Users</a>
+      <a href="{% url 'index' %}" class="exit-link">Exit</a>
+    </aside>
+
+    <main class="chat">
+      <!-- 인트로 (처음 카드 및 문구) -->
+      <div class="intro" id="intro">
+        <h2>잊혀진 기억을 찾으러 떠날 시간입니다.</h2>
+        <div class="intro-cards">
+          <div class="intro-card" id="startCard">
+            <div class="emoji">💡</div>
+            <div class="title">시작하기</div>
+            <div class="desc">채팅창에 시작이라고 적거나<br> 버튼을 눌러주세요.</div>
+          </div>
+          <div class="intro-card">
+            <div class="emoji">✈️</div>
+            <div class="title">기억 찾기</div>
+            <div class="desc">질문에 차근차근 답해보세요.</div>
+          </div>
+          <div class="intro-card">
+            <div class="emoji">🔍</div>
+            <div class="title">목표 달성</div>
+            <div class="desc">당신의 답답함을 없애드릴게요.</div>
+          </div>
+        </div>
+      </div>
+
+<!-- 채팅 메시지 영역 -->
+  <div class="chat-messages" id="chatMessages" style="display: none;">
+    <div class="chat-messages-inner" id="messagesInner"></div>
+  </div>
+
+  <!-- 입력창 -->
+  <div class="chat-input" id="chatInput">
+    <div class="input-wrapper">
+      <input type="text" id="userInput" placeholder="무엇이든 물어보세요" />
+      <button id="sendBtn">↑</button>
+    </div>
+  </div>
+
+      <!-- 스크롤 버튼 -->
+      <button class="scroll-to-bottom" id="scrollToBottom">↓</button>
+    </main>
+  </div>
+  <script src="{% static 'js/chat.js' %}"></script>
+</body>
+</html>
