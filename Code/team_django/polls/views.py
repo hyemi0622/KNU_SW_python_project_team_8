@@ -1,22 +1,22 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Question
-import json
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
-
-import os
+import json
+import traceback
 from dotenv import load_dotenv
 
+from openai import OpenAI  # ✅ 최신 방식: OpenAI 인스턴스 생성
 
-from openai import OpenAI
-
-import traceback
-
+# 환경 변수 불러오기
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+# ✅ OpenAI 인스턴스 초기화
+client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
+# ---------- 기본 페이지 라우팅 ----------
 def index(request):
     return render(request, 'polls/index.html')
 
@@ -36,6 +36,7 @@ def meetourteam(request):
     return render(request, 'polls/meetourteam.html')
 
 
+# ---------- 질문 불러오기 ----------
 @csrf_exempt
 def get_followup_questions(request):
     if request.method == "POST":
@@ -60,17 +61,7 @@ def get_followup_questions(request):
     return JsonResponse({"error": "POST 요청만 허용됩니다."}, status=405)
 
 
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-import os
-import json
-from openai import OpenAI
-from dotenv import load_dotenv
-import traceback
-
-load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
+# ---------- 사용자 응답 처리 & GPT 응답 ----------
 @csrf_exempt
 def process_answers(request):
     if request.method == "POST":
@@ -89,9 +80,14 @@ def process_answers(request):
 질문-답변 목록:
 {json.dumps(qa_list, ensure_ascii=False, indent=2)}
 
-당신은 이 정보만으로 사용자가 찾고자 하는 기억을 추론해서 알려줘야 합니다.
+당신은 이 정보만으로 사용자가 찾고자 하는 기억을 추론해서 알려줘야 합니다.  
+**그리고 추론 결과를를 구체적으로 하나 제시해야 합니다.**  
+만약 복수의 후보가 있을 경우, 5가지 정도의 선택지를 주세요.   
+제목은 응답의 첫 줄에 굵게 제시해 주세요.  
+
 """
 
+            # 최신 방식으로 GPT 호출
             response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[

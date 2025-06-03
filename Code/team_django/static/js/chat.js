@@ -1,4 +1,66 @@
-  // ✅ 상태 변수
+  
+  
+  
+  
+
+async function submitAnswers() {
+  const messagesInner = document.getElementById("messagesInner");
+
+  // 질문과 답변을 묶어 qa 리스트 생성
+  const qaList = followupQuestions.map((question, index) => ({
+    question: question,
+    answer: answers.responseList[index] || ""
+  }));
+
+  //  서버에 보낼 전체 데이터 구성
+  const payload = {
+    category: answers.category,
+    subcategory: "",  // 필요하면 여기에 값 추가
+    qa: qaList
+  };
+
+  try {
+    //  Django 서버에 POST
+    const response = await fetch("/polls/process_answers/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+
+    //  GPT 요약 응답 출력
+    const doneMsg = document.createElement("div");
+    doneMsg.className = "message ai";
+    doneMsg.innerText = data.summary || "모든 질문이 완료되었습니다. 감사합니다.";
+    messagesInner.appendChild(doneMsg);
+    scrollToBottom();
+
+  } catch (error) {
+    console.error("❌ 에러 발생:", error);
+    const errorMsg = document.createElement("div");
+    errorMsg.className = "message ai";
+    errorMsg.innerText = "오류가 발생했습니다. 잠시 후 다시 시도해주세요.";
+    messagesInner.appendChild(errorMsg);
+    scrollToBottom();
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  //  상태 변수
   let isTyping = false;
   let selectedCategory = "";
   let followupQuestions = [];
@@ -342,11 +404,3 @@ function showNextQuestion() {
 }
 
 
-function submitAnswers() {
-  const doneMsg = document.createElement("div");
-  doneMsg.className = "message ai";
-  doneMsg.innerText = "모든 질문이 완료되었습니다. 감사합니다.";
-  const messagesInner = document.getElementById("messagesInner");
-  messagesInner.appendChild(doneMsg);
-  scrollToBottom();
-} 
