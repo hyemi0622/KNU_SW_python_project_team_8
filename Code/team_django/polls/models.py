@@ -1,4 +1,21 @@
 from django.db import models
+import uuid  # 랜덤으로 사용자 추가 
+
+
+class MemoryRecord(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    category = models.CharField(max_length=50) #카테고리 
+    keyword = models.CharField(max_length=50,default="어느 사용자의 기억") # 사용자가 입력한 키워드 
+    qa_json = models.JSONField(default=list)
+    summary = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+
+
+
+
+
 
 class Question(models.Model):
     CATEGORY_CHOICES = [
@@ -39,3 +56,6 @@ class Question(models.Model):
     def __str__(self):
         sub = self.subcategory if self.subcategory else '기본'
         return f"[{self.category}/{sub}] Q{self.order}: {self.text}"
+
+
+

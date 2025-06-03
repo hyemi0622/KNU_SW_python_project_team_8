@@ -222,8 +222,8 @@ body {
 }
 .square-dot {
   display: inline-block;
-  width: 9px;       /* ✅ 네모 너비 */
-  height: 9px;      /* ✅ 네모 높이 */
+  width: 9px;       /* 네모 너비 */
+  height: 9px;      /* 네모 높이 */
   background-color: rgb(253, 253, 253);
   border-radius: 2px;
   position: relative;
@@ -280,15 +280,15 @@ body {
   pointer-events: none;
   transition: opacity 0.3s ease;
 
-  /* ✅ 중앙 정렬 */
+  /*  중앙 정렬 */
   display: flex;
   align-items: center;
   justify-content: center;
 
-  /* ✅ 패딩 제거 */
+  /*  패딩 제거 */
   padding: 0;
 
-  /* ✅ 폰트 높이 보정 */
+  /* 폰트 높이 보정 */
   line-height: 1;
 }
 
@@ -361,4 +361,26 @@ body {
 
 .category-buttons button:hover {
   background-color: #ddd;
+}
+
+
+/* 저장 버튼 부분*/
+
+.save-button {
+  margin-top: 16px;
+  padding: 10px 18px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background-color: #0d70d3;
+}
+.save-button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
 }

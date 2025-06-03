@@ -36,6 +36,59 @@ async function submitAnswers() {
     messagesInner.appendChild(doneMsg);
     scrollToBottom();
 
+
+
+
+  
+    //  "답변을 저장할까요?" 버튼 만들기
+  const saveBtn = document.createElement("button");
+  saveBtn.className = "save-button";
+  saveBtn.innerText = "답변을 저장할까요?";
+  saveBtn.onclick = () => {
+  const keywordPrompt = document.createElement("div");
+  keywordPrompt.className = "message ai";
+  keywordPrompt.innerHTML = `
+    <label>저장할 키워드를 입력하세요 (50자 이내)</label><br>
+    <input type="text" id="keywordInput" maxlength="50" placeholder="예: 서울여행, 깜빡한 단어" style="margin-top: 8px; width: 80%; padding: 6px; border-radius: 6px; border: 1px solid #ccc;">
+    <button id="confirmSaveBtn" style="margin-left: 10px;">저장</button>
+  `;
+  messagesInner.appendChild(keywordPrompt);
+  scrollToBottom();
+
+  document.getElementById("confirmSaveBtn").onclick = async () => {
+    const keyword = document.getElementById("keywordInput").value.trim();
+    if (keyword === "") {
+      alert("키워드를 입력해주세요.");
+      return;
+    }
+
+    const saveResponse = await fetch("/polls/save_memory_record/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        category: answers.category,
+        keyword: keyword,
+        qa: followupQuestions.map((q, i) => ({
+          question: q,
+          answer: answers.responseList[i] || ""
+        })),
+        summary: data.summary
+      })
+    });
+
+    const saveData = await saveResponse.json();
+    keywordPrompt.innerHTML = `<div class="message ai"> 저장 완료! 키워드: <b>${keyword}</b><br>ID: ${saveData.id}</div>`;
+    scrollToBottom();
+  };
+};
+
+messagesInner.appendChild(saveBtn);
+scrollToBottom();
+
+
+
+
+
   } catch (error) {
     console.error("❌ 에러 발생:", error);
     const errorMsg = document.createElement("div");
@@ -350,7 +403,7 @@ async function fetchQuestions(category) {
   return questionBank[key] || [];
 }
 
-// ✅ 질문 시작
+//  질문 시작
 async function startQuestions(category) {
   followupQuestions = await fetchQuestions(category);
   currentQuestionIndex = 0;
