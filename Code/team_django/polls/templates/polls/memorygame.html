@@ -1,1 +1,61 @@
+{% load static %}
+<!--<link rel="stylesheet" href="{% static 'css/word_game.css' %}">-->
+<!DOCTYPE html>
+<html lang = "ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Game 선택</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+        body,html{
+            width: 100%;
+            height: 100%;
+            font-family: 'Pretendard', sans-serif;
+        }
+        .container {
+      display: flex;
+      width: 100%;
+      height: 100vh;
+    }
+    .half {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: 0.3s;
+      color: white;
+      text-decoration: none;
+    }
+    .half:hover {
+      filter: brightness(1.1);
+    }
+    .left {
+      background-color: #6a5acd;
+    }
+    .right {
+      background-color: #20b2aa;
+    }
+  </style>
+</head>
+<body>
 
+  <div class="container">
+    
+    <a class="half left" href="{% url 'word_game' %}">
+      🤔 단어찾기 게임
+    </a>
+
+    
+    <a class="half right" href="{% url 'position_game' %}">
+      🔒 위치 기억하기 게임
+    </a>
+  </div>
+
+</body>
+</html>

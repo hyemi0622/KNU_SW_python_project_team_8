@@ -13,5 +13,15 @@ def fourpanel(request):
 def memorygame(request):
     return render(request, 'polls/memorygame.html')
 
+
 def otherusers(request):
     return render(request, 'polls/otherusers.html')
+
+def memory_home(request):
+    return render(request, 'polls/memory_home.html')
+
+def word_game(request):
+    return render(request, 'polls/word_game.html')
+
+def position_game(request):
+    return render(request, 'polls/position_game.html')
