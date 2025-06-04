@@ -195,12 +195,28 @@
   animation: wave-bounce 0.9s ease-in-out;
   animation-iteration-count: 1;
 }
+.main-subtext {
+  position: absolute;
+  top: 30vh;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #444;
+  font-weight: 500;
+  line-height: 1.6;
+  z-index: 5;
+  font-family: 'Pretendard', sans-serif;
+}
   </style>
 </head>
 <body>
   <a href="{% url 'index' %}" style="all: unset; position: fixed; top: 24px; left: 24px; font-size: 19px; font-weight: 600; color: #111; background: transparent; cursor: pointer;">←   </a>
   <h1 class="main-title" id="mainTitle">Memory Game</h1>
-  
+  <div class="main-subtext">
+    Recall. Relive. Rebuild.<br>
+     Challenge your mind through playful memory games.<br>
+     Sometimes the key to your memories lies in the most unexpected places.
+</div>
   <div class="select-container">
     <div class="select-card left" data-game="word">
       <div class="select-title">Word Search Game</div>
