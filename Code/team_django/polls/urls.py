@@ -20,6 +20,8 @@ urlpatterns = [
     path("process_answers/", views.process_answers, name="process_answers"),   #api로 연결된 답변 
     
      path('save_memory_record/', views.save_memory_record, name='save_memory_record'),  #기억 저장. 
+     
+     path('otherusers/', views.otherusers, name='otherusers'), #db에 있는키 꺼내오기 
 
 ]
 

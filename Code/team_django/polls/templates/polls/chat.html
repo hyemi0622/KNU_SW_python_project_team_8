@@ -12,7 +12,7 @@
   <div class="container">
     <aside class="sidebar">
       <div class="logo">
-          <img src="{% static 'images/logo.png' %}" alt="logo">
+          <img src="{% static 'images/logo.png' %}" alt="Moji 로고" />
       </div>
       <a href="{% url 'chat' %}" class="chat-link">New Chat</a>
       <a href="{% url 'memorygame' %}" class="memory-link">Memory Game</a>
@@ -43,18 +43,18 @@
         </div>
       </div>
 
-<!-- 채팅 메시지 영역 -->
-  <div class="chat-messages" id="chatMessages" style="display: none;">
-    <div class="chat-messages-inner" id="messagesInner"></div>
-  </div>
+      <!-- 채팅 메시지 -->
+      <div class="chat-messages" id="chatMessages" style="display: none;">
+        <div class="chat-messages-inner" id="messagesInner"></div>
+      </div>
 
-  <!-- 입력창 -->
-  <div class="chat-input" id="chatInput">
-    <div class="input-wrapper">
-      <input type="text" id="userInput" placeholder="무엇이든 물어보세요" />
-      <button id="sendBtn">↑</button>
-    </div>
-  </div>
+      <!-- 입력창 -->
+      <div class="chat-input" id="chatInput">
+        <div class="input-wrapper">
+          <input type="text" id="userInput" placeholder="무엇이든 물어보세요" />
+          <button id="sendBtn">↑</button>
+        </div>
+      </div>
 
       <!-- 스크롤 버튼 -->
       <button class="scroll-to-bottom" id="scrollToBottom">↓</button>

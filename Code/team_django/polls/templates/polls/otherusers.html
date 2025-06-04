@@ -23,12 +23,34 @@
     </div>
   </div>
 </footer>
-  <main class="card-flow-wrapper">
-    <div class="card-row row-1"></div>
-    <div class="card-row row-2"></div>
-    <div class="card-row row-3"></div>
-    <div class="card-row row-4"></div> 
-  </main>
+<main class="card-flow-wrapper">
+<div class="card-row row-1">
+  {% for record in row1 %}
+    <div class="memory-card">{{ record.keyword }}</div>
+  {% endfor %}
+</div>
+
+
+<div class="card-row row-2">
+  {% for record in row2 %}
+    <div class="memory-card">{{ record.keyword }}</div>
+  {% endfor %}
+</div>
+
+
+<div class="card-row row-3">
+  {% for record in row3 %}
+    <div class="memory-card">{{ record.keyword }}</div>
+  {% endfor %}
+</div>
+<div class="card-row row-4">
+  {% for record in row4 %}
+    <div class="memory-card">{{ record.keyword }}</div>
+  {% endfor %}
+</div>
+
+
+</main>
 
   <div id="cardModal" class="modal">
   <div class="modal-content">

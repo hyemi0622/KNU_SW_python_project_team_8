@@ -113,7 +113,7 @@ def process_answers(request):
 
     return JsonResponse({"error": "POST 요청만 허용됩니다."}, status=405)
 
-#저장 API 만들기 
+# 결과 저장하기  
 
 @csrf_exempt
 def save_memory_record(request):
@@ -129,3 +129,22 @@ def save_memory_record(request):
         return JsonResponse({"id": str(record.id), "status": "saved"})
 
     return JsonResponse({"error": "POST only"}, status=405)
+
+
+#저장된 결과 다시 화면에 띄우기 
+
+def otherusers(request):
+    records = MemoryRecord.objects.order_by('-created_at')
+    row1 = records[0::4]
+    row2 = records[1::4]
+    row3 = records[2::4]
+    row4 = records[3::4]
+
+    return render(request, 'polls/otherusers.html', {
+        'row1': row1,
+        'row2': row2,
+        'row3': row3,
+        'row4': row4,
+    })
+
+
