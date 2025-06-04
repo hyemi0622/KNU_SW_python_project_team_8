@@ -35,6 +35,12 @@ def memorygame(request):
 def otherusers(request):
     return render(request, 'polls/otherusers.html')
 
+def word_game(request):
+    return render(request, 'polls/word_game.html')
+
+def position_game(request):
+    return render(request, 'polls/position_game.html')
+
 def meetourteam(request):
     return render(request, 'polls/meetourteam.html')
 
