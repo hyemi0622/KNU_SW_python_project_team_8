@@ -1,0 +1,316 @@
+[
+  {
+    "level": 1,
+    "background": "images/position_bg_level1.png",
+    "targets": [
+      {
+        "name": "공",
+        "xRange" : {"min":70, "max":116},
+        "yRange" : {"min":107, "max":134},
+        "radius": 30
+      },
+      {
+       
+        "name": "호주 지도",
+        "xRange" : {"min":670, "max":773},
+        "yRange" : {"min":465, "max":503},
+        "radius": 30
+      },
+      {
+        "name": "슬리퍼",
+        "xRange" : {"min":445, "max":494},
+        "yRange" : {"min":32, "max":65},
+        "radius": 30
+      },
+      {
+        "name": "부메랑",
+        "xRange" : {"min":586, "max":650},
+        "yRange" : {"min":345, "max":359},
+        "radius": 30
+      },
+      {
+        "name": "긴 부채",
+        "xRange" : {"min":556, "max":614},
+        "yRange" : {"min":185, "max":219},
+        "radius": 30
+      },
+      {
+        "name": "서핑 보드",
+        "xRange" : {"min":718, "max":746},
+        "yRange" : {"min":321, "max":364},
+        "radius": 30
+      },
+      {
+        "name": "호주 국기",
+        "xRange" : {"min":112, "max":170},
+        "yRange" : {"min":281, "max":296},
+        "radius": 30
+      },
+      {
+        "name": "물고기1",
+        "xRange" : {"min":87, "max":137},
+        "yRange" : {"min":336, "max":357},
+        "radius": 30
+      },
+      {
+        "name": "물고기2",
+        "xRange" : {"min":330, "max":356},
+        "yRange" : {"min":165, "max":200},
+        "radius": 30
+      },
+      {
+        "name": "럭비공",
+        "xRange" : {"min":222, "max":264},
+        "yRange" : {"min":347, "max":369},
+        "radius": 30
+      }
+    ]
+  },
+  {
+    "level": 2,
+    "background": "images/position_bg_level2.png",
+    "targets": [
+      {
+        "name": "바늘",
+        "xRange" : {"min":653, "max":692},
+        "yRange" : {"min":210, "max":288},
+        "radius": 20
+      },
+      {
+       
+        "name": "갈매기",
+        "xRange" : {"min":540, "max":670},
+        "yRange" : {"min":36, "max":46},
+        "radius": 20
+      },
+      {
+        "name": "지렁이",
+        "xRange" : {"min":534, "max":697},
+        "yRange" : {"min":415, "max":430},
+        "radius": 20
+      },
+      {
+        "name": "참새",
+        "xRange" : {"min":266, "max":322},
+        "yRange" : {"min":377, "max":398},
+        "radius": 20
+      },
+      {
+        "name": "달님",
+        "xRange" : {"min":192, "max":216},
+        "yRange" : {"min":187, "max":238},
+        "radius": 20
+      },
+      {
+        "name": "미니왕관",
+        "xRange" : {"min":595, "max":637},
+        "yRange" : {"min":216, "max":234},
+        "radius": 20
+      },
+      {
+        "name": "빗",
+        "xRange" : {"min":741, "max":768},
+        "yRange" : {"min":147, "max":191},
+        "radius": 20
+      },
+      {
+        "name": "우산",
+        "xRange" : {"min":440, "max":467},
+        "yRange" : {"min":132, "max":203},
+        "radius": 20
+      },
+      {
+        "name": "나무조각",
+        "xRange" : {"min":600, "max":631},
+        "yRange" : {"min":319, "max":337},
+        "radius": 20
+      },
+      {
+        "name": "비석",
+        "xRange" : {"min":691, "max":715},
+        "yRange" : {"min":392, "max":406},
+        "radius": 20
+      },
+      {
+        "name": "편지봉투",
+        "xRange" : {"min":81, "max":143},
+        "yRange" : {"min":410, "max":423},
+        "radius": 20
+      },
+      {
+        "name": "미니구두",
+        "xRange" : {"min":309, "max":320},
+        "yRange" : {"min":336, "max":350},
+        "radius": 20
+      },
+      {
+        "name": "돛단배",
+        "xRange" : {"min":735, "max":759},
+        "yRange" : {"min":248, "max":277},
+        "radius": 20
+      },
+      {
+        "name": "치즈조각",
+        "xRange" : {"min":89, "max":124},
+        "yRange" : {"min":336, "max":358},
+        "radius": 20
+      },
+      {
+        "name": "배드민턴 공",
+        "xRange" : {"min":559, "max":585},
+        "yRange" : {"min":118, "max":147},
+        "radius": 20
+      },
+      {
+        "name": "촛불",
+        "xRange" : {"min":63, "max":93},
+        "yRange" : {"min":97, "max":154},
+        "radius": 20
+      }
+    ]
+  },
+  {
+    "level": 3,
+    "background": "images/position_bg_level3.png",
+    "targets": [{
+        "name": "옥수수",
+        "xRange" : {"min":576, "max":597},
+        "yRange" : {"min":306, "max":337},
+        "radius": 20
+      },
+      {
+       
+        "name": "셔틀콕",
+        "xRange" : {"min":593, "max":623},
+        "yRange" : {"min":224, "max":241},
+        "radius": 20
+      },
+      {
+        "name": "나비넥타이",
+        "xRange" : {"min":432, "max":465},
+        "yRange" : {"min":166, "max":183},
+        "radius": 20
+      },
+      {
+        "name": "치즈조각",
+        "xRange" : {"min":568, "max":612},
+        "yRange" : {"min":179, "max":209},
+        "radius": 20
+      },
+      {
+        "name": "씸블",
+        "xRange" : {"min":503, "max":526},
+        "yRange" : {"min":350, "max":365},
+        "radius": 20
+      },
+      {
+        "name": "식빵",
+        "xRange" : {"min":457, "max":511},
+        "yRange" : {"min":262, "max":299},
+        "radius": 30
+      },
+      {
+        "name": "오목한그릇",
+        "xRange" : {"min":207, "max":251},
+        "yRange" : {"min":231, "max":250},
+        "radius": 20
+      },
+      {
+        "name": "뼈다귀",
+        "xRange" : {"min":357, "max":391},
+        "yRange" : {"min":326, "max":333},
+        "radius": 20
+      },
+      {
+        "name": "옷걸이",
+        "xRange" : {"min":230, "max":265},
+        "yRange" : {"min":139, "max":166},
+        "radius": 30
+      },
+      {
+        "name": "콘아이스크림",
+        "xRange" : {"min":297, "max":327},
+        "yRange" : {"min":157, "max":192},
+        "radius": 20
+      },
+      {
+        "name": "계란후라이",
+        "xRange" : {"min":98, "max":147},
+        "yRange" : {"min":360, "max":379},
+        "radius": 20
+      },
+      {
+        "name": "물고기",
+        "xRange" : {"min":312, "max":338},
+        "yRange" : {"min":194, "max":259},
+        "radius": 20
+      },
+      {
+        "name": "겨울모자",
+        "xRange" : {"min":155, "max":218},
+        "yRange" : {"min":167, "max":199},
+        "radius": 20
+      },
+      {
+        "name": "부메랑",
+        "xRange" : {"min":389, "max":457},
+        "yRange" : {"min":88, "max":116},
+        "radius": 30
+      },
+      {
+        "name": "하트",
+        "xRange" : {"min":89, "max":131},
+        "yRange" : {"min":77, "max":97},
+        "radius": 20
+      },
+      {
+        "name": "벙어리 장갑",
+        "xRange" : {"min":312, "max":345},
+        "yRange" : {"min":96, "max":114},
+        "radius": 20
+      },
+      {
+        "name": "사과",
+        "xRange" : {"min":94, "max":132},
+        "yRange" : {"min":254, "max":271},
+        "radius": 20
+      },
+      {
+        "name": "넥타이",
+        "xRange" : {"min":160, "max":186},
+        "yRange" : {"min":317, "max":355},
+        "radius": 20
+      },
+      {
+        "name": "머그잔",
+        "xRange" : {"min":537, "max":572},
+        "yRange" : {"min":378, "max":396},
+        "radius":20
+      },
+      {
+        "name": "올리브",
+        "xRange" : {"min":560, "max":580},
+        "yRange" : {"min":104, "max":117},
+        "radius": 20
+      },
+      {
+        "name": "노",
+        "xRange" : {"min":106, "max":119},
+        "yRange" : {"min":404, "max":469},
+        "radius": 30
+      },
+      {
+        "name": "박쥐",
+        "xRange" : {"min":242, "max":302},
+        "yRange" : {"min":419, "max":443},
+        "radius": 30
+      },
+      {
+        "name": "장갑",
+        "xRange" : {"min":423, "max":459},
+        "yRange" : {"min":444, "max":467},
+        "radius": 20
+      }
+    ]
+  }
+]
