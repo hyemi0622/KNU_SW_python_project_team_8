@@ -14,6 +14,8 @@ urlpatterns = [
     path('memorygame/', views.memorygame, name='memorygame'),
     path('otherusers/', views.otherusers, name='otherusers'),
     path('meetourteam/', views.meetourteam, name='meetourteam'),
+    path('word_game/', views.word_game, name='word_game'),
+    path('position_game/', views.position_game, name='position_game'),
     path('get_followup_questions/', views.get_followup_questions, name='get_followup_questions'),
     
     
