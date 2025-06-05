@@ -5,20 +5,45 @@
   <meta charset="UTF-8">
   <title>단어 퍼즐 게임</title>
   <style>
-    body {
-      font-family: 'Pretendard', sans-serif;
-      text-align: center;
-      background-color: #f5f5f5;
-      padding: 2rem;
-    }
-    .level-select {
-      margin-bottom: 2rem;
-    }
+body {
+  position: relative;
+  font-family: 'Pretendard', sans-serif;
+  text-align: center;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+h1 {
+  position: absolute;
+  top: 17vh;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+
+.level-select {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-size: 15px;
+}
+
+/* 추가: Level과 버튼 사이 간격 */
+.level-select h2 {
+  margin-bottom: 30px;
+}
     .level-btn {
       padding: 10px 20px;
-      margin: 5px;
-      font-size: 16px;
+      margin: 15px;
+      font-size: 15px;
       cursor: pointer;
+      border-radius: 20px;
+      border: 1.5px solid #222; 
     }
     table {
       margin: 0 auto;
@@ -67,10 +92,10 @@
 </head>
 <body>
   <a href="{% url 'memorygame' %}" style="all: unset; position: fixed; top: 24px; left: 24px; font-size: 19px; font-weight: 600; color: #111; background: transparent; cursor: pointer;">←   </a>
-  <h1> 단어 퍼즐 게임</h1>
+  <h1> Word Search Game</h1>
 
   <div class="level-select" id="levelSelect">
-    <h2>난이도를 선택하세요</h2>
+    <h2>Level</h2>
     <button class="level-btn" onclick="startGame(1)">1단계</button>
     <button class="level-btn" onclick="startGame(2)">2단계</button>
     <button class="level-btn" onclick="startGame(3)">3단계</button>

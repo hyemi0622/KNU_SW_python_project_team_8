@@ -162,10 +162,11 @@
       text-align: center;
     }
     .motion-desc {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: #333;
       text-align: center;
-      margin-bottom: 30px;
+      margin-top: 10px;
+      margin-bottom: 20px;
       animation: fadeInUp 0.8s;
     }
     @keyframes fadeInUp {
@@ -200,12 +201,27 @@
   top: 30vh;
   width: 100%;
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
   color: #444;
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 1.9;
   z-index: 5;
   font-family: 'Pretendard', sans-serif;
+}
+.close-btn {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #888;
+  cursor: pointer;
+  z-index: 20;
+  transition: color 0.2s;
+}
+.close-btn:hover {
+  color: #222;
 }
   </style>
 </head>
@@ -237,6 +253,7 @@
   <!-- 설명 모션 오버레이 -->
   <div class="overlay" id="overlay">
     <div class="motion-card" id="motionCard">
+          <button class="close-btn" id="closeBtn" aria-label="닫기">&times;</button>
       <div class="motion-title" id="motionTitle"></div>
       <div class="motion-desc" id="motionDesc"></div>
       <div class="motion-timer" id="motionTimer"></div>
@@ -277,17 +294,17 @@
         // 설명 모달에 정보 채우기
         motionTitle.innerHTML = info.title;
         motionDesc.innerHTML = info.desc;
-        motionTimer.innerHTML = `게임이 <b>${countdown}</b>초 뒤에 시작됩니다...`;
+        motionTimer.innerHTML = `Navigating <b>${countdown}</b>...`;
         overlay.classList.add('active');
         // 카운트다운
         let remain = countdown;
         timer = setInterval(() => {
           remain--;
           if(remain > 0) {
-            motionTimer.innerHTML = `게임이 <b>${remain}</b>초 뒤에 시작됩니다...`;
+            motionTimer.innerHTML = `Navigating <b>${remain}</b>...`;
           } else {
             clearInterval(timer);
-            motionTimer.innerHTML = `게임을 시작합니다!`;
+            motionTimer.innerHTML = `Let's Go`;
             setTimeout(() => {
               window.location.href = info.url;
             }, 600); // 약간의 텀 후 이동
@@ -330,6 +347,25 @@ window.addEventListener('DOMContentLoaded', function() {
   const h1 = document.getElementById('mainTitle');
   applyWaveEffect(h1);
 });
+
+const closeBtn = document.getElementById('closeBtn');
+
+// 오버레이 닫기 함수
+function closeOverlay() {
+  clearInterval(timer);
+  overlay.classList.remove('active');
+}
+
+// X 버튼 클릭 시 닫기
+closeBtn.addEventListener('click', closeOverlay);
+
+// ESC 키 누를 때 닫기
+document.addEventListener('keydown', function(event) {
+  if (overlay.classList.contains('active') && (event.key === "Escape" || event.key === "Esc")) {
+    closeOverlay();
+  }
+});
+
   </script>
 </body>
 </html>
