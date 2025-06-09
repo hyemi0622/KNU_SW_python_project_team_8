@@ -44,7 +44,7 @@ async function submitAnswers() {
     //  GPT 요약 응답 출력
     const doneMsg = document.createElement("div");
     doneMsg.className = "message ai";
-    doneMsg.innerText = data.summary || "모든 질문이 완료되었습니다. 감사합니다.";
+    doneMsg.innerText = data.summary || "모든 질문이 완료되었습니다. 감사합니다. 🤝";
     messagesInner.appendChild(doneMsg);
     scrollToBottom();
 
@@ -60,7 +60,7 @@ async function submitAnswers() {
   const keywordPrompt = document.createElement("div");
   keywordPrompt.className = "message ai";
   keywordPrompt.innerHTML = `
-    <label>저장할 키워드를 입력하세요 (50자 이내) 📩 </label><br>
+    <label>저장할 키워드를 입력하세요 (50자 이내) 💾 </label><br>
     <input type="text" id="keywordInput" maxlength="50" placeholder="예: 서울여행, 깜빡한 단어" style="margin-top: 8px; width: 80%; padding: 6px; border-radius: 6px; border: 1px solid #ccc;">
     <button id="confirmSaveBtn" style="margin-left: 10px;">save</button>
   `;
