@@ -123,7 +123,9 @@ def process_answers(request):
 
 @csrf_exempt
 def save_memory_record(request):
+    print("=== process_answers called ===")
     if request.method == "POST":
+        print("=== POST method received ===")
         data = json.loads(request.body)
 
         record = MemoryRecord.objects.create(

@@ -469,7 +469,42 @@ body {
   cursor: pointer;
   transition: color 0.2s;
 }
-
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  gap: 16px;  /* 버튼 사이 간격 */
+  margin-top: 20px;
+}
 .modal-close:hover {
   color: #111;
+}
+.modal-footer-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.not-save-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 36px;
+  padding: 14px 36px;
+  background: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+.not-save-button:hover,
+.not-save-button:focus {
+  background: #e0e0e0;
+}
+.not-save-button:active {
+  background: #d0d0d0;
 }

@@ -1,6 +1,75 @@
   
   
-  
+function showGptResponseModal(summaryText) {
+  const modal = document.getElementById("gptResponseModal");
+  const modalBody = document.getElementById("gptResponseModalBody");
+  const messagesInner = document.getElementById("messagesInner");
+  if (!modal || !modalBody || !messagesInner) return;
+
+  // 줄바꿈 문자(\r\n, \n 등)를 <br> 태그로 변환
+  const formattedText = (summaryText || "응답이 없습니다.")
+    .replace(/(\r\n|\n|\r)/g, '<br>');
+
+  modalBody.innerHTML = formattedText;
+  modal.style.display = "flex";
+
+  const modalSaveBtn = document.getElementById("modalSaveBtn");
+  const modalNotSaveBtn = document.getElementById("modalNotSaveBtn");
+
+  // 중복 이벤트 방지: 기존 핸들러 제거
+  modalSaveBtn.onclick = null;
+  modalNotSaveBtn.onclick = null;
+
+  modalSaveBtn.onclick = () => {
+  modal.style.display = "none";
+  // 키워드 입력 모달 띄우기
+  const keywordModal = document.getElementById("keywordModal");
+  keywordModal.style.display = "flex";
+  document.getElementById("keywordInput").value = ""; // 입력창 초기화
+  setTimeout(() => document.getElementById("keywordInput").focus(), 100);
+
+  document.getElementById("confirmSaveBtn").onclick = async () => {
+    const keyword = document.getElementById("keywordInput").value.trim();
+    if (keyword === "") {
+      alert("키워드를 입력해주세요.");
+      return;
+    }
+    const saveResponse = await fetch("/polls/save_memory_record/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        category: answers.category,
+        keyword: keyword,
+        qa: followupQuestions.map((q, i) => ({
+          question: q,
+          answer: answers.responseList[i] || ""
+        })),
+        summary: summaryText
+      })
+    });
+    const saveData = await saveResponse.json();
+    keywordModal.style.display = "none";
+    showSaveCompleteModal(keyword, saveData.id);
+  };
+};
+
+  modalNotSaveBtn.onclick = () => {
+  modal.style.display = "none";
+  // 메모리 게임 이동 여부 모달 띄우기
+  const memoryGameModal = document.getElementById("memoryGameModal");
+  memoryGameModal.style.display = "flex";
+
+  // OK 버튼: memorygame 페이지로 이동
+  document.getElementById("goMemoryBtn").onclick = () => {
+    window.location.href = "/polls/memorygame/";
+  };
+
+  // No 버튼: 메인 홈(index)으로 이동
+  document.getElementById("goHomeBtn").onclick = () => {
+    window.location.href = "/polls/index";
+  };
+};
+}
   
 function showSaveCompleteModal(keyword, id) {
   const modal = document.getElementById('saveCompleteModal');
@@ -40,66 +109,16 @@ async function submitAnswers() {
     });
 
     const data = await response.json();
+     const doneMsg = document.createElement("div");
+    doneMsg.className = "message ai";
+    doneMsg.innerText = "모든 질문이 완료되었습니다. 감사합니다. 🤝";
+    messagesInner.appendChild(doneMsg);
 
     //  GPT 요약 응답 출력
-    const doneMsg = document.createElement("div");
-    doneMsg.className = "message ai";
-    doneMsg.innerText = data.summary || "모든 질문이 완료되었습니다. 감사합니다. 🤝";
-    messagesInner.appendChild(doneMsg);
+    showGptResponseModal(data.summary);
     scrollToBottom();
 
-
-
-
-  
-    //  "답변을 저장할까요?" 버튼 만들기
-  const saveBtn = document.createElement("button");
-  saveBtn.className = "save-button";
-  saveBtn.innerText = "Save response?";
-  saveBtn.onclick = () => {
-  const keywordPrompt = document.createElement("div");
-  keywordPrompt.className = "message ai";
-  keywordPrompt.innerHTML = `
-    <label>저장할 키워드를 입력하세요 (50자 이내) 💾 </label><br>
-    <input type="text" id="keywordInput" maxlength="50" placeholder="예: 서울여행, 깜빡한 단어" style="margin-top: 8px; width: 80%; padding: 6px; border-radius: 6px; border: 1px solid #ccc;">
-    <button id="confirmSaveBtn" style="margin-left: 10px;">save</button>
-  `;
-  messagesInner.appendChild(keywordPrompt);
-  scrollToBottom();
-
-  document.getElementById("confirmSaveBtn").onclick = async () => {
-    const keyword = document.getElementById("keywordInput").value.trim();
-    if (keyword === "") {
-      alert("키워드를 입력해주세요.");
-      return;
-    }
-
-    const saveResponse = await fetch("/polls/save_memory_record/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        category: answers.category,
-        keyword: keyword,
-        qa: followupQuestions.map((q, i) => ({
-          question: q,
-          answer: answers.responseList[i] || ""
-        })),
-        summary: data.summary
-      })
-    });
-
-    const saveData = await saveResponse.json();
-showSaveCompleteModal(keyword, saveData.id);
-  };
-};
-
-messagesInner.appendChild(saveBtn);
-scrollToBottom();
-
-
-
-
-
+console.log("서버 응답:", data);
   } catch (error) {
     console.error("❌ 에러 발생:", error);
     const errorMsg = document.createElement("div");
@@ -111,19 +130,6 @@ scrollToBottom();
 }
 
 
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
   //  상태 변수
   let isTyping = false;
   let selectedCategory = "";
@@ -350,7 +356,7 @@ const questionBank = {
     "그 단어를 마지막으로 썼거나 들었던 장소나 상황은 어디였나요?"
   ],
   4: [
-     "영화,드라마, 애니메이션, 책 중 어느 것이 적어주세요.",
+     "영화,드라마, 애니메이션, 책 중 어느 것인지 적어주세요.",
     "어떤 장르였나요? (예: 액션, 로맨스, 공포, 범죄 등)",
     "등장하는 배우 또는 성우 이름이 기억나나요? 주연,조연 가리지 말고 전부 적어주세요.",
     "방영 연도는 언제쯤인가요? (예: 2010~2014년 사이)",
@@ -359,7 +365,7 @@ const questionBank = {
     "작품에서 가장 기억에 남는 장면이 있었나요? 주연,조연 가리지 말고 전부 적어주세요.",
     "이 작품를 처음 접한 경로는? (극장, OTT, TV, 유튜브 광고 등)",
     "등장인물의 캐릭터 이름이 기억 나시나요?",
-    "배경이 현실인가요? 판타지인가요? Q12 작품 속 등장한 장소를 생각 나는 대로 전부 적어주세요. (예: 교도소,학교 , 카페, 항구..)",
+    "배경이 현실인가요? 판타지인가요? 작품 속 등장한 장소를 생각 나는 대로 전부 적어주세요. (예: 교도소,학교 , 카페, 항구..)",
     "작품에서 등장한 대사가 기억나세요?",
     "작가,감독,제작사 중에 아는 것이 있으시면 적어주세요.",
     "작품의 결말이 기억 나시나요?(예: 주인공이 희생함.)",
@@ -467,4 +473,6 @@ function showNextQuestion() {
   }, 1800);
 }
 
-
+function closeKeywordModal() {
+  document.getElementById("keywordModal").style.display = "none";
+}
