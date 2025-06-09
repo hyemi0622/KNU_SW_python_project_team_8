@@ -8,6 +8,8 @@
 
 #### 📌 프로젝트의 목적 및 주요 기능 설명 :
 [![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](./explanation/README.md)
+#### 📌 프로젝트 FLOW CHART :
+[![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](./flowchart/README.md)
 #### 🚀 설치 및 실행 방법 :
 [![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](./Installation&Execution/README.md)
 
