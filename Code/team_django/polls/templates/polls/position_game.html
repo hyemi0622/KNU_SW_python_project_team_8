@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>위치 기억 게임</title>
+  <title></title>
   <style>
     html, body {
       width: 100vw;
@@ -85,34 +85,34 @@
       position: relative;
       padding: 0;
     }
-    #game-area {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-      background: transparent;
-    }
-    canvas {
-      border: 2px solid #aaa;
-      display: block;
-      margin: 20px auto;
-      background: #fff;
-      box-shadow: 0 2px 12px 0 rgba(180,200,230,0.09);
-    }
-    .word-list-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      width: 100%;
-      height: 120px;
-      margin-top: 32px;
-      gap: 18px;
-    }
+#game-area {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* 위로 붙임 */
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+canvas {
+  border: 2px solid #aaa;
+  display: block;
+  margin: 20px auto 10px auto; /* 위 여백 20px, 아래 10px */
+  background: #fff;
+  box-shadow: 0 2px 40px 0 rgba(180,200,230,0.09);
+}
+.word-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 30px;
+  gap: 18px;
+  height: auto;
+}
     .word-list {
       display: flex;
       align-items: center;
@@ -136,18 +136,18 @@
       color: #888;
       background: #e9ecef;
     }
-    #next-level-btn {
-      display: none;
-      margin-top: 10px;
-      padding: 10px 30px;
-      font-size: 16px;
-      background-color: #2e2e2e;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      align-self: center;
-    }
+#next-level-btn {
+  margin-top: 18px; /* 버튼만 아래로 내림 */
+  padding: 10px 30px;
+  font-size: 16px;
+  background-color: #2e2e2e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: center;
+  display: block;
+}
     .level-select-box {
       background: #fff;
       border-radius: 18px;
@@ -237,13 +237,7 @@
       color: #aaa;
       cursor: not-allowed;
     }
-    #clearMessage {
-      text-align: center;
-      font-size: 1.5rem;
-      margin-top: 20px;
-      color: #007bff;
-      display: none;
-    }
+  
     @media (max-width: 900px) {
       .container { flex-direction: column; }
       .left-panel, .right-panel { border-radius: 0; height: auto; min-height: 0; }
@@ -305,17 +299,16 @@
       <div class="logo">
         <img src="{% static 'images/logo.png' %}" alt="Moji Logo" class="footer-logo" />
       </div>
-      <h1>위치 기억 게임</h1>
+      <h1>Location Memory Game</h1>
       <div class="desc">
-        그림 속에서 정해진 위치를 찾아보세요!<br>
-        집중력과 기억력을 동시에 키울 수 있습니다.
+        Remember the location of the cards <br>and boost your memory!
       </div>
     </div>
     <!-- 오른쪽 패널 -->
     <div class="right-panel">
       <div class="level-select-box" id="levelSelectBox">
-        <h2>레벨 선택</h2>
-        <div class="subtext">한 번에 하나의 레벨만 선택할 수 있습니다.</div>
+        <h2>Select Level</h2>
+        <div class="subtext">You can select only one level at a time.</div>
         <div class="level-btns">
           <button class="level-btn" onclick="selectLevel(1)">
             <span>Lv.1</span>
@@ -332,7 +325,7 @@
         </div>
         <div class="action-row">
           <button class="action-btn" onclick="goBack()">←</button>
-          <button class="action-btn" id="continueBtn" onclick="continueGame()" disabled>시작</button>
+          <button class="action-btn" id="continueBtn" onclick="continueGame()" disabled>start</button>
         </div>
       </div>
       <!-- 게임 영역 (초기엔 숨김) -->
@@ -340,7 +333,7 @@
         <canvas id="gameCanvas" width="800" height="600"></canvas>
         <div class="word-list-wrapper">
           <div class="word-list" id="targetList"></div>
-          <button id="next-level-btn" onclick="goToNextLevel()">다음 단계로</button>
+          <button id="next-level-btn" onclick="goToNextLevel()">next level</button>
         </div>
         <div id="clearMessage"></div>
       </div>
@@ -348,202 +341,175 @@
   </div>
   <div id="success-modal" class="success-modal">
     <div class="success-modal-content">
-      <div class="success-title">성공!</div>
-      <button class="exit-btn" id="exitBtn">나가기</button>
+      <div class="success-title">success</div>
+      <button class="exit-btn" id="exitBtn">exit</button>
     </div>
   </div>
   <script>
-    // 레벨 선택 로직
-    let selectedLevel = null;
-    const levelBtns = document.querySelectorAll('.level-btn');
-    const continueBtn = document.getElementById('continueBtn');
-    const levelSelectBox = document.getElementById('levelSelectBox');
-    const gameArea = document.getElementById('game-area');
-    const targetListEl = document.getElementById('targetList');
-    const nextLevelBtn = document.getElementById('next-level-btn');
-    const clearMessage = document.getElementById('clearMessage');
-    const successModal = document.getElementById('success-modal');
-    const exitBtn = document.getElementById('exitBtn');
+  // 레벨 선택 로직
+  let selectedLevel = null;
+  const levelBtns = document.querySelectorAll('.level-btn');
+  const continueBtn = document.getElementById('continueBtn');
+  const levelSelectBox = document.getElementById('levelSelectBox');
+  const gameArea = document.getElementById('game-area');
+  const targetListEl = document.getElementById('targetList');
+  const nextLevelBtn = document.getElementById('next-level-btn');
+  const clearMessage = document.getElementById('clearMessage');
+  const successModal = document.getElementById('success-modal');
+  const exitBtn = document.getElementById('exitBtn');
+  let levels = []; // 여기서 선언만
 
-    // 레벨 데이터 (JSON)
-    const levels = [
-      {
-        "level": 1,
-        "background": "{% static 'images/position_bg_level1.png' %}",
-        "targets": [
-          {"name": "공", "xRange": {"min":70, "max":116}, "yRange": {"min":107, "max":134}, "radius": 30},
-          {"name": "호주 지도", "xRange": {"min":670, "max":773}, "yRange": {"min":465, "max":503}, "radius": 30},
-          {"name": "슬리퍼", "xRange": {"min":445, "max":494}, "yRange": {"min":32, "max":65}, "radius": 30},
-          {"name": "부메랑", "xRange": {"min":586, "max":650}, "yRange": {"min":345, "max":359}, "radius": 30},
-          {"name": "긴 부채", "xRange": {"min":556, "max":614}, "yRange": {"min":185, "max":219}, "radius": 30},
-          {"name": "서핑 보드", "xRange": {"min":718, "max":746}, "yRange": {"min":321, "max":364}, "radius": 30},
-          {"name": "호주 국기", "xRange": {"min":112, "max":170}, "yRange": {"min":281, "max":296}, "radius": 30},
-          {"name": "물고기1", "xRange": {"min":87, "max":137}, "yRange": {"min":336, "max":357}, "radius": 30},
-          {"name": "물고기2", "xRange": {"min":330, "max":356}, "yRange": {"min":165, "max":200}, "radius": 30},
-          {"name": "럭비공", "xRange": {"min":222, "max":264}, "yRange": {"min":347, "max":369}, "radius": 30}
-        ]
-      },
-      {
-        "level": 2,
-        "background": "{% static 'images/position_bg_level2.png' %}",
-        "targets": [
-          {"name": "바늘", "xRange": {"min":653, "max":692}, "yRange": {"min":210, "max":288}, "radius": 20},
-          {"name": "갈매기", "xRange": {"min":540, "max":670}, "yRange": {"min":36, "max":46}, "radius": 20},
-          {"name": "지렁이", "xRange": {"min":534, "max":697}, "yRange": {"min":415, "max":430}, "radius": 20},
-          {"name": "참새", "xRange": {"min":266, "max":322}, "yRange": {"min":377, "max":398}, "radius": 20},
-          {"name": "달님", "xRange": {"min":192, "max":216}, "yRange": {"min":187, "max":238}, "radius": 20},
-          {"name": "미니왕관", "xRange": {"min":595, "max":637}, "yRange": {"min":216, "max":234}, "radius": 20},
-          {"name": "빗", "xRange": {"min":741, "max":768}, "yRange": {"min":147, "max":191}, "radius": 20},
-          {"name": "우산", "xRange": {"min":440, "max":467}, "yRange": {"min":132, "max":203}, "radius": 20},
-          {"name": "나무조각", "xRange": {"min":600, "max":631}, "yRange": {"min":319, "max":337}, "radius": 20},
-          {"name": "비석", "xRange": {"min":691, "max":715}, "yRange": {"min":392, "max":406}, "radius": 20},
-          {"name": "편지봉투", "xRange": {"min":81, "max":143}, "yRange": {"min":410, "max":423}, "radius": 20},
-          {"name": "미니구두", "xRange": {"min":309, "max":320}, "yRange": {"min":336, "max":350}, "radius": 20},
-          {"name": "돛단배", "xRange": {"min":735, "max":759}, "yRange": {"min":248, "max":277}, "radius": 20},
-          {"name": "치즈조각", "xRange": {"min":89, "max":124}, "yRange": {"min":336, "max":358}, "radius": 20},
-          {"name": "배드민턴 공", "xRange": {"min":559, "max":585}, "yRange": {"min":118, "max":147}, "radius": 20},
-          {"name": "촛불", "xRange": {"min":63, "max":93}, "yRange": {"min":97, "max":154}, "radius": 20}
-        ]
-      },
-      {
-        "level": 3,
-        "background": "{% static 'images/position_bg_level3.png' %}",
-        "targets": [
-          {"name": "옥수수", "xRange": {"min":576, "max":597}, "yRange": {"min":306, "max":337}, "radius": 20},
-          {"name": "셔틀콕", "xRange": {"min":593, "max":623}, "yRange": {"min":224, "max":241}, "radius": 20},
-          {"name": "나비넥타이", "xRange": {"min":432, "max":465}, "yRange": {"min":166, "max":183}, "radius": 20},
-          {"name": "치즈조각", "xRange": {"min":568, "max":612}, "yRange": {"min":179, "max":209}, "radius": 20},
-          {"name": "씸블", "xRange": {"min":503, "max":526}, "yRange": {"min":350, "max":365}, "radius": 20},
-          {"name": "식빵", "xRange": {"min":457, "max":511}, "yRange": {"min":262, "max":299}, "radius": 30},
-          {"name": "오목한그릇", "xRange": {"min":207, "max":251}, "yRange": {"min":231, "max":250}, "radius": 20},
-          {"name": "뼈다귀", "xRange": {"min":357, "max":391}, "yRange": {"min":326, "max":333}, "radius": 20},
-          {"name": "옷걸이", "xRange": {"min":230, "max":265}, "yRange": {"min":139, "max":166}, "radius": 30},
-          {"name": "콘아이스크림", "xRange": {"min":297, "max":327}, "yRange": {"min":157, "max":192}, "radius": 20},
-          {"name": "계란후라이", "xRange": {"min":98, "max":147}, "yRange": {"min":360, "max":379}, "radius": 20},
-          {"name": "물고기", "xRange": {"min":312, "max":338}, "yRange": {"min":194, "max":259}, "radius": 20},
-          {"name": "겨울모자", "xRange": {"min":155, "max":218}, "yRange": {"min":167, "max":199}, "radius": 20},
-          {"name": "부메랑", "xRange": {"min":389, "max":457}, "yRange": {"min":88, "max":116}, "radius": 30},
-          {"name": "하트", "xRange": {"min":89, "max":131}, "yRange": {"min":77, "max":97}, "radius": 20},
-          {"name": "벙어리 장갑", "xRange": {"min":312, "max":345}, "yRange": {"min":96, "max":114}, "radius": 20},
-          {"name": "사과", "xRange": {"min":94, "max":132}, "yRange": {"min":254, "max":271}, "radius": 20},
-          {"name": "넥타이", "xRange": {"min":160, "max":186}, "yRange": {"min":317, "max":355}, "radius": 20},
-          {"name": "머그잔", "xRange": {"min":537, "max":572}, "yRange": {"min":378, "max":396}, "radius":20},
-          {"name": "올리브", "xRange": {"min":560, "max":580}, "yRange": {"min":104, "max":117}, "radius": 20},
-          {"name": "노", "xRange": {"min":106, "max":119}, "yRange": {"min":404, "max":469}, "radius": 30},
-          {"name": "박쥐", "xRange": {"min":242, "max":302}, "yRange": {"min":419, "max":443}, "radius": 30},
-          {"name": "장갑", "xRange": {"min":423, "max":459}, "yRange": {"min":444, "max":467}, "radius": 20}
-        ]
+  // JSON 파일 불러오기
+  fetch("{% static 'data/position_game_levels.json' %}")
+    .then(response => {
+      if (!response.ok) throw new Error("HTTP error " + response.status);
+      return response.json();
+    })
+    .then(data => {
+      levels = data; // 데이터를 받아오면 levels에 할당
+    })
+    .catch(err => console.error(err));
+
+  function selectLevel(level) {
+    selectedLevel = level;
+    levelBtns.forEach((btn, idx) => {
+      if (idx === level - 1) {
+        btn.classList.add('selected');
+      } else {
+        btn.classList.remove('selected');
       }
-    ];
+    });
+    continueBtn.disabled = false;
+  }
 
-    function selectLevel(level) {
-      selectedLevel = level;
-      levelBtns.forEach((btn, idx) => {
-        if (idx === level - 1) {
-          btn.classList.add('selected');
-        } else {
-          btn.classList.remove('selected');
-        }
-      });
-      continueBtn.disabled = false;
+  function goBack() {
+  document.querySelector('.right-panel').style.justifyContent = 'center';
+  window.location.href = "{% url 'memorygame' %}";
+}
+
+  function continueGame() {
+    if (selectedLevel) {
+    // 게임 시작 시, 오른쪽 패널을 상단 정렬로 변경
+    document.querySelector('.right-panel').style.justifyContent = 'flex-start';
+    levelSelectBox.style.display = 'none';
+    gameArea.style.display = 'flex';
+    startGame(selectedLevel);
+  }
+}
+
+  // 게임 로직
+  let currentLevel = 1;
+  let targets = [];
+  let foundTargets = [];
+  let canvas, ctx, bgImg;
+  let canvasClickHandler = null; // 캔버스 이벤트 핸들러 저장용
+
+  function startGame(levelNum) {
+    currentLevel = levelNum;
+    if (levels.length === 0) {
+      alert("레벨 데이터가 아직 로드되지 않았습니다. 잠시 후 다시 시도해 주세요.");
+      return;
+    }
+    const level = levels.find(l => l.level === levelNum);
+    if (!level) {
+      alert("레벨 데이터를 찾을 수 없습니다.");
+      return;
+    }
+    targets = [...level.targets];
+    foundTargets = [];
+
+    nextLevelBtn.style.display = "none";
+    clearMessage.style.display = "none";
+
+    // 기존 이벤트 리스너 제거 (중복 방지)
+    if (canvasClickHandler) {
+      canvas.removeEventListener('click', canvasClickHandler);
+      canvasClickHandler = null;
     }
 
-    function goBack() {
-      window.location.href = "{% url 'memorygame' %}";
-    }
+    // 배경 이미지 로드 (경로에 /static/ 추가)
+    bgImg = new Image();
+    bgImg.src = "/static/" + level.background; // 중요: 경로에 /static/ 추가
+    bgImg.onload = () => {
+      canvas = document.getElementById('gameCanvas');
+      ctx = canvas.getContext('2d');
+      renderGame();
+      renderTargetList();
 
-    function continueGame() {
-      if (selectedLevel) {
-        levelSelectBox.style.display = 'none';
-        gameArea.style.display = 'flex';
-        startGame(selectedLevel);
-      }
-    }
-
-    // 게임 로직
-    let currentLevel = 1;
-    let targets = [];
-    let foundTargets = [];
-    let canvas, ctx, bgImg;
-
-    function startGame(levelNum) {
-      currentLevel = levelNum;
-      const level = levels.find(l => l.level === levelNum);
-      targets = [...level.targets];
-      foundTargets = [];
-
-      nextLevelBtn.style.display = "none";
-      clearMessage.style.display = "none";
-
-      // 배경 이미지 로드
-      bgImg = new Image();
-      bgImg.src = level.background;
-      bgImg.onload = () => {
-        canvas = document.getElementById('gameCanvas');
-        ctx = canvas.getContext('2d');
-        renderGame();
-        renderTargetList();
-      };
-
-      // 캔버스 클릭 이벤트
-      canvas.addEventListener('click', handleCanvasClick);
-    }
-
-    function renderGame() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
-    }
-
-    function renderTargetList() {
-      targetListEl.innerHTML = "";
-      targets.forEach(target => {
-        const item = document.createElement("div");
-        item.className = "word-item";
-        item.id = `target-${target.name}`;
-        item.textContent = target.name;
-        targetListEl.appendChild(item);
-      });
-    }
-
-    function handleCanvasClick(event) {
-      const rect = canvas.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-
-      // 타겟 검사
-      for (let i = 0; i < targets.length; i++) {
-        const target = targets[i];
-        const xCenter = (target.xRange.min + target.xRange.max) / 2;
-        const yCenter = (target.yRange.min + target.yRange.max) / 2;
-        const dist = Math.sqrt((x - xCenter) ** 2 + (y - yCenter) ** 2);
-        if (dist <= target.radius && !foundTargets.includes(target.name)) {
-          foundTargets.push(target.name);
-          document.getElementById(`target-${target.name}`).classList.add("found-word");
-          checkLevelComplete();
-          break;
-        }
-      }
-    }
-
-    function checkLevelComplete() {
-      if (foundTargets.length === targets.length) {
-        clearMessage.style.display = "block";
-        clearMessage.textContent = "클리어!";
-        if (currentLevel < 3) {
-          nextLevelBtn.style.display = "inline-block";
-        } else {
-          successModal.classList.add('active');
-        }
-      }
-    }
-
-    function goToNextLevel() {
-      startGame(currentLevel + 1);
-    }
-
-    exitBtn.onclick = function() {
-      window.location.href = "{% url 'memorygame' %}";
+      // 캔버스 클릭 이벤트 추가
+      canvasClickHandler = handleCanvasClick;
+      canvas.addEventListener('click', canvasClickHandler);
     };
-  </script>
+    bgImg.onerror = () => {
+      console.error("이미지를 불러오지 못했습니다:", bgImg.src);
+      alert("이미지를 불러오지 못했습니다. 경로를 확인해 주세요.");
+    };
+  }
+
+  function renderGame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+  }
+
+  function renderTargetList() {
+    targetListEl.innerHTML = "";
+    targets.forEach(target => {
+      const item = document.createElement("div");
+      item.className = "word-item";
+      item.id = `target-${target.name}`;
+      item.textContent = target.name;
+      targetListEl.appendChild(item);
+    });
+  }
+
+  function handleCanvasClick(event) {
+  const rect = canvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  let isInTarget = false;
+  for (let i = 0; i < targets.length; i++) {
+    const target = targets[i];
+    const xCenter = (target.xRange.min + target.xRange.max) / 2;
+    const yCenter = (target.yRange.min + target.yRange.max) / 2;
+    const dist = Math.sqrt((x - xCenter) ** 2 + (y - yCenter) ** 2);
+    if (dist <= target.radius && !foundTargets.includes(target.name)) {
+      foundTargets.push(target.name);
+      document.getElementById(`target-${target.name}`).classList.add("found-word");
+      checkLevelComplete();
+      isInTarget = true;
+      break;
+    }
+  }
+
+  if (isInTarget) {
+    ctx.beginPath();
+    ctx.arc(x, y, 15, 0, 2 * Math.PI);
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  }
+}
+
+  function checkLevelComplete() {
+    if (foundTargets.length === targets.length) {
+      clearMessage.style.display = "block";
+      if (currentLevel < 3) {
+        nextLevelBtn.style.display = "inline-block";
+      } else {
+        successModal.classList.add('active');
+      }
+    }
+  }
+
+  function goToNextLevel() {
+    startGame(currentLevel + 1);
+  }
+
+  exitBtn.onclick = function() {
+    window.location.href = "{% url 'memorygame' %}";
+  };
+</script>
+
 </body>
 </html>
