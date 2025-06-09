@@ -2,6 +2,18 @@
   
   
   
+function showSaveCompleteModal(keyword, id) {
+  const modal = document.getElementById('saveCompleteModal');
+  const body = document.getElementById('saveCompleteModalBody');
+  body.innerHTML = `<div style="font-size:18px; font-weight:600; margin-bottom:12px;">Save complete</div>
+    <div>Keyword: <b>${keyword}</b></div>
+    <div style="margin-top:8px; color:#888;">ID: ${id}</div>`;
+  modal.style.display = 'flex';
+}
+
+function closeSaveCompleteModal() {
+  document.getElementById('saveCompleteModal').style.display = 'none';
+}
 
 async function submitAnswers() {
   const messagesInner = document.getElementById("messagesInner");
@@ -77,8 +89,7 @@ async function submitAnswers() {
     });
 
     const saveData = await saveResponse.json();
-    keywordPrompt.innerHTML = `<div class="message ai"> 저장 완료! 키워드: <b>${keyword}</b><br>ID: ${saveData.id}</div>`;
-    scrollToBottom();
+showSaveCompleteModal(keyword, saveData.id);
   };
 };
 
