@@ -5,7 +5,7 @@
 function showSaveCompleteModal(keyword, id) {
   const modal = document.getElementById('saveCompleteModal');
   const body = document.getElementById('saveCompleteModalBody');
-  body.innerHTML = `<div style="font-size:18px; font-weight:600; margin-bottom:12px;">Save complete</div>
+  body.innerHTML = `<div style="font-size:18px; font-weight:600; margin-bottom:12px;">Save complete 📥</div>
     <div>Keyword: <b>${keyword}</b></div>
     <div style="margin-top:8px; color:#888;">ID: ${id}</div>`;
   modal.style.display = 'flex';
