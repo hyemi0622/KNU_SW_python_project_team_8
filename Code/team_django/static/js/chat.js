@@ -43,14 +43,14 @@ async function submitAnswers() {
     //  "답변을 저장할까요?" 버튼 만들기
   const saveBtn = document.createElement("button");
   saveBtn.className = "save-button";
-  saveBtn.innerText = "답변을 저장할까요?";
+  saveBtn.innerText = "Save response?";
   saveBtn.onclick = () => {
   const keywordPrompt = document.createElement("div");
   keywordPrompt.className = "message ai";
   keywordPrompt.innerHTML = `
-    <label>저장할 키워드를 입력하세요 (50자 이내)</label><br>
+    <label>저장할 키워드를 입력하세요 (50자 이내) 📩 </label><br>
     <input type="text" id="keywordInput" maxlength="50" placeholder="예: 서울여행, 깜빡한 단어" style="margin-top: 8px; width: 80%; padding: 6px; border-radius: 6px; border: 1px solid #ccc;">
-    <button id="confirmSaveBtn" style="margin-left: 10px;">저장</button>
+    <button id="confirmSaveBtn" style="margin-left: 10px;">save</button>
   `;
   messagesInner.appendChild(keywordPrompt);
   scrollToBottom();

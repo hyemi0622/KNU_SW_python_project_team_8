@@ -364,23 +364,65 @@ body {
 }
 
 
-/* 저장 버튼 부분*/
-
 .save-button {
-  margin-top: 16px;
-  padding: 10px 18px;
-  background-color: #4CAF50;
-  color: white;
-  border-radius: 8px;
+  display: flex;
+  align-items: center;         /* 수직 중앙 정렬 */
+  justify-content: center;     /* 수평 중앙 정렬 */
+  margin-top: 24px;
+  padding: 14px 36px;
+  background: linear-gradient(90deg, #4e4e4e 0%, #383838 100%);
+  color: #fff;
   border: none;
-  font-size: 16px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 16px rgba(76,175,80,0.12), 0 1.5px 4px rgba(44,62,80,0.06);
   cursor: pointer;
+  outline: none;
+  position: relative;
+  overflow: hidden;
 }
 
-.save-button:hover {
-  background-color: #0d70d3;
+.save-button:hover,
+.save-button:focus {
+  background: linear-gradient(90deg, #3b3b3b 0%, #2c2c2c 100%);
 }
+
+.save-button:active {
+  background: linear-gradient(90deg, #383838 0%, #363636 100%);
+}
+
 .save-button:disabled {
-  background-color: gray;
+  background: #bdbdbd;
+  color: #fff;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+#confirmSaveBtn {
+  background-color: #636363; /* 초록 배경 */
+  color: white;              /* 흰색 텍스트 */
+  border: none;
+  padding: 7px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+    margin-top: 24px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#confirmSaveBtn:hover {
+  background-color: #424242; 
+}
+
+#confirmSaveBtn:active {
+  background-color: #333333;  
+}
+
+#confirmSaveBtn:disabled {
+  background-color: #6b6b6b; 
   cursor: not-allowed;
 }
