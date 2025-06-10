@@ -15,11 +15,15 @@
 #### 💡 사용된 라이브러리 :
 [![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](UsedLibraries) 
 
+#### 📖 템플릿 :
+[![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](Template)
+
 #### 🖥️ 실행 화면 :
 [![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](ExecutionScreen/README.md) 
 
-#### 📖 템플릿 :
-[![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](Template)
+#### 👉 시행착오 및 향후 계획 :
+[![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](TrialAndError/README.md)
+
 #### 🗓️ 주차별 리스트 (내용 버튼 클릭하면 해당 페이지로 이동합니다.) :
    
 | 주차                           | 📋내용                | 👩 고혜민             | 👩 김가령            | 👩 정혜미              | 📈진행     |
@@ -32,7 +36,7 @@
 | 6주차 |  [![6주차 내용](https://img.shields.io/badge/6주차_내용-60a5fa)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Week/6th_Week)   | 플로우차트 짜기 , 발표 대본 작성, 워드 클라우드 개발 | 발표 대본 , 정확률 계산 개발  | 깃허브 수정, 발표 ppt , 가령언니가 추가 개발한 거 UI 개선 |![status](https://img.shields.io/badge/Not%20started-112051) |
 | 7주차 |  [![7주차 내용](https://img.shields.io/badge/7주차_내용-60a5fa)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Week/7th_Week)   |  |  |   |![status](https://img.shields.io/badge/Not%20started-112051) |
 
+<hr>
 
-
-### 📤 프로젝트 FLOW CHART
+#### 📤 프로젝트 FLOW CHART
 ![flowchart](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/images/flowchart.png?raw=true)
