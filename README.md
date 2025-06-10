@@ -8,8 +8,7 @@
 
 #### 📌 프로젝트의 목적 및 주요 기능 설명 :
 [![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](./explanation/README.md)
-#### 📌 프로젝트 FLOW CHART :
-[![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](./flowchart/README.md)
+
 #### 🚀 설치 및 실행 방법 :
 [![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](./Installation&Execution/README.md)
 
@@ -29,3 +28,8 @@
 | 5주차 | [![5주차 내용](https://img.shields.io/badge/5주차_내용-60a5fa)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Week/5th_Week)  | Position Game 개발,피드백 반영 Position Game 추가 |  chat과 API 연동, django 서버 연동 | 웹사이트 Meet The Team, Remember Other users 파트 개발,Memory Game 파트 디자인 수정  |![status](https://img.shields.io/badge/Finish%20-009000) |
 | 6주차 |  [![6주차 내용](https://img.shields.io/badge/6주차_내용-60a5fa)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Week/6th_Week)   | 플로우차트 짜기 , 발표 대본 작성, 워드 클라우드 개발 | 발표 대본 , 정확률 계산 개발  | 깃허브 수정, 발표 ppt , 가령언니가 추가 개발한 거 UI 개선 |![status](https://img.shields.io/badge/Not%20started-112051) |
 | 7주차 |  [![7주차 내용](https://img.shields.io/badge/7주차_내용-60a5fa)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Week/7th_Week)   |  |  |   |![status](https://img.shields.io/badge/Not%20started-112051) |
+
+
+
+### 📤 프로젝트 FLOW CHART
+![flowchart](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/images/flowchart.png?raw=true)
