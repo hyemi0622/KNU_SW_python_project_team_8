@@ -3,6 +3,10 @@ from django.http import JsonResponse
 from .models import Question
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
+from wordcloud import WordCloud
+
+
+from konlpy.tag import Okt # 자바환경에서 써야해서 사용 못함. 
 
 # 아이디 부여를 위한. 
 import uuid
@@ -18,11 +22,14 @@ import base64
 import json
 import traceback
 from dotenv import load_dotenv
-
+from konlpy.tag import Okt
 from .models import MemoryRecord, GlobalClickCount
 
 
 from openai import OpenAI  #  최신 방식: OpenAI 인스턴스 생성
+
+# 한글 폰트 지정. 
+
 
 # 환경 변수 불러오기
 load_dotenv()
@@ -218,6 +225,8 @@ def get_accuracy_stats(request):
     })
 
 
+
+# 정확도 차트
 def get_accuracy_pie_image(request):
     counter = GlobalClickCount.objects.first()
     save = counter.save_clicks if counter else 0
@@ -241,4 +250,43 @@ def get_accuracy_pie_image(request):
     image_base64 = base64.b64encode(buf.read()).decode('utf-8')
     buf.close()
 
+    return JsonResponse({'image': image_base64})
+
+
+
+
+
+
+#워드 클라우드 , 힌글 사용 가능하게 
+plt.rc('font', family='AppleGothic')
+plt.rcParams['axes.unicode_minus'] = False
+
+
+
+from wordcloud import WordCloud
+# ... (생략) ...
+
+def get_wordcloud_image(request):
+    summaries = MemoryRecord.objects.values_list('summary', flat=True)
+    text = ' '.join(summaries) if summaries else 'No Data'
+
+    # 불용어 집합 정의
+    korean_stopwords = {
+        "에게", "가", "는", "은", "을", "를", "에", "의", "에서", "으로", "로", "과", "와", "도", "만", "보다", "처럼",
+        "까지", "부터", "하고", "이나", "라도", "마저", "조차", "든지", "이라도", "라든지", "께서", "한테", "밖에"
+    }
+
+    wordcloud = WordCloud(
+        width=400,
+        height=200,
+        background_color='white',
+        font_path='/Library/Fonts/AppleGothic.ttf',  # macOS 기준
+        stopwords=korean_stopwords
+    ).generate(text)
+
+    buf = io.BytesIO()
+    wordcloud.to_image().save(buf, format='PNG')
+    buf.seek(0)
+    image_base64 = base64.b64encode(buf.read()).decode('utf-8')
+    buf.close()
     return JsonResponse({'image': image_base64})

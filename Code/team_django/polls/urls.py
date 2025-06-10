@@ -33,6 +33,10 @@ urlpatterns = [
 
      path('get_accuracy_pie_image/', views.get_accuracy_pie_image, name='get_accuracy_pie_image'),
 
+
+     path('get_wordcloud_image/', views.get_wordcloud_image, name='get_wordcloud_image'),
+
+
 ]
 
 

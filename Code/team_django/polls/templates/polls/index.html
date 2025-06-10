@@ -70,6 +70,10 @@
     <h2>정확도 정보</h2>
     <img id="accuracyPieImg" src="" alt="정확도 파이차트" style="display:block; margin:0 auto; width:150px; height:150px;">
     <p id="accuracyModalBody">여기에 정확도 관련 내용을 넣을 수 있습니다.</p>
+    
+    
+    <img id="wordcloudImg" src="" alt="워드클라우드" style="display:block; margin:20px auto 0; width:90%; max-width:400px;">
+
   </div>
 </div>
 
@@ -135,8 +139,17 @@ fetch('/polls/get_accuracy_pie_image/')
     document.getElementById('accuracyPieImg').src = 'data:image/png;base64,' + data.image;
     document.getElementById('accuracyModal').style.display = 'flex';
   });
+
   
-  }
+
+
+  // 워드클라우드 이미지 불러와서 <img>에 표시
+fetch('/polls/get_wordcloud_image/')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('wordcloudImg').src = 'data:image/png;base64,' + data.image;
+  });
+    }
 
 
 
