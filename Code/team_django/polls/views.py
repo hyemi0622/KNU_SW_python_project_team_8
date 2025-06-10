@@ -156,3 +156,7 @@ def otherusers(request):
     })
 
 
+def get_memory_records(request):
+    # 최신순(가장 최근에 저장한 것부터)으로 정렬
+    records = MemoryRecord.objects.all().order_by('-id').values('id', 'keyword', 'summary')
+    return JsonResponse(list(records), safe=False)

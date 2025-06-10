@@ -70,7 +70,20 @@ function showGptResponseModal(summaryText) {
   };
 };
 }
-  
+
+function extractNumberedItems(summaryText) {
+  // 1. ~ 5.으로 시작하는 줄만 추출
+  const lines = summaryText.split(/\r?\n/);
+  const items = [];
+  for (let line of lines) {
+    const match = line.match(/^\s*([1-5])\.\s*(.+)$/);
+    if (match) {
+      items[parseInt(match[1], 10) - 1] = match[2].trim();
+    }
+  }
+  return items;
+}
+
 function showSaveCompleteModal(keyword, id) {
   const modal = document.getElementById('saveCompleteModal');
   const body = document.getElementById('saveCompleteModalBody');

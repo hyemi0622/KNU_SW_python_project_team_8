@@ -92,9 +92,12 @@
   <div class="modal-content" style="text-align:center;">
     <span class="modal-close" onclick="closeKeywordModal()">&times;</span>
     <div class="modal-body">
-      <label style="font-weight:500;">Please enter a keyword to save (50자 이내) 💾</label><br>
+      <label style="font-weight:500;">저장할 번호(1~5)를 입력하세요</label><br>
+      <input type="number" id="numberInput" min="1" max="5" placeholder="1~5" style="margin-top: 8px; width: 60px; padding: 6px; border-radius: 6px; border: 1px solid #ccc;">
+      <br>
+      <label style="font-weight:500; margin-top:12px;">키워드 (50자 이내) 💾</label><br>
       <input type="text" id="keywordInput" maxlength="50" placeholder="예: 서울여행, 깜빡한 단어" style="margin-top: 8px; width: 80%; padding: 6px; border-radius: 6px; border: 1px solid #ccc;">
-      <div class="modal-footer-center">
+      <div class="modal-footer-center" style="margin-top:18px;">
         <button id="confirmSaveBtn" class="save-button">save</button>
       </div>
     </div>
