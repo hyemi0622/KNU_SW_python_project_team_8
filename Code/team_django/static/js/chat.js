@@ -28,29 +28,45 @@ function showGptResponseModal(summaryText) {
   document.getElementById("keywordInput").value = ""; // 입력창 초기화
   setTimeout(() => document.getElementById("keywordInput").focus(), 100);
 
-  document.getElementById("confirmSaveBtn").onclick = async () => {
-    const keyword = document.getElementById("keywordInput").value.trim();
-    if (keyword === "") {
-      alert("키워드를 입력해주세요.");
-      return;
-    }
-    const saveResponse = await fetch("/polls/save_memory_record/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        category: answers.category,
-        keyword: keyword,
-        qa: followupQuestions.map((q, i) => ({
-          question: q,
-          answer: answers.responseList[i] || ""
-        })),
-        summary: summaryText
-      })
-    });
-    const saveData = await saveResponse.json();
-    keywordModal.style.display = "none";
-    showSaveCompleteModal(keyword, saveData.id);
-  };
+document.getElementById("confirmSaveBtn").onclick = async () => {
+  const keyword = document.getElementById("keywordInput").value.trim();
+  if (keyword === "") {
+    alert("키워드를 입력해주세요.");
+    return;
+  }
+  // 사용자가 입력한 번호 가져오기
+  const numberInput = document.getElementById("numberInput");
+  const selectedNumber = parseInt(numberInput.value, 10);
+  if (!selectedNumber || selectedNumber < 1 || selectedNumber > 5) {
+    alert("1~5 사이의 번호를 입력해주세요.");
+    return;
+  }
+  // summaryText에서 해당 번호 항목만 추출
+  const items = extractNumberedItems(summaryText);
+  const summary = items[selectedNumber - 1] || "";
+  if (!summary) {
+    alert(selectedNumber + "번 항목이 없습니다.");
+    return;
+  }
+
+  const saveResponse = await fetch("/polls/save_memory_record/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      category: answers.category,
+      keyword: keyword,
+      qa: followupQuestions.map((q, i) => ({
+        question: q,
+        answer: answers.responseList[i] || ""
+      })),
+      summary: summary
+    })
+  });
+  const saveData = await saveResponse.json();
+  keywordModal.style.display = "none";
+  addCardToRows({ id: saveData.id, keyword: keyword, summary: summary });
+  showSaveCompleteModal(keyword, saveData.id);
+};
 };
 
   modalNotSaveBtn.onclick = () => {
