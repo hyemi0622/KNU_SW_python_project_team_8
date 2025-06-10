@@ -16,10 +16,10 @@ function createCard(keyword, id, summary = "") {
     <div class="memory-text">${keyword}</div>
   `;
   card.onclick = () => {
-    document.getElementById("modalTitle").innerText = `#${id}`;
-    document.getElementById("modalBody").innerText = summary || keyword;
-    document.getElementById("cardModal").style.display = "flex";
-  };
+  document.getElementById("modalTitle").innerHTML = `${keyword}`;
+  document.getElementById("modalBody").innerText = summary;
+  document.getElementById("cardModal").style.display = "flex";
+};
   return card;
 }
 
