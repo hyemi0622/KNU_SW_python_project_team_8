@@ -15,6 +15,9 @@
 #### 💡 사용된 라이브러리 :
 [![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](UsedLibraries) 
 
+#### 🖥️ 실행 화면 :
+[![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](UsedLibraries) 
+
 #### 📖 템플릿 :
 [![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](Template)
 #### 🗓️ 주차별 리스트 (내용 버튼 클릭하면 해당 페이지로 이동합니다.) :
