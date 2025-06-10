@@ -31,6 +31,8 @@ urlpatterns = [
      path('get_accuracy_stats/', views.get_accuracy_stats, name='get_accuracy_stats'),
 
 
+     path('get_accuracy_pie_image/', views.get_accuracy_pie_image, name='get_accuracy_pie_image'),
+
 ]
 
 

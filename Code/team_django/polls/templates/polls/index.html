@@ -63,13 +63,16 @@
 
 
   <!-- 정확도 모달 -->
-  <div id="accuracyModal" class="modal">
-    <div class="modal-content">
-      <span class="close" id="closeAccuracyModal">&times;</span>
-      <h2>정확도 정보</h2>
-      <p id="accuracyModalBody">여기에 정확도 관련 내용을 넣을 수 있습니다.</p>
-    </div>
+  <!-- 정확도 모달 -->
+<div id="accuracyModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeAccuracyModal">&times;</span>
+    <h2>정확도 정보</h2>
+    <img id="accuracyPieImg" src="" alt="정확도 파이차트" style="display:block; margin:0 auto; width:150px; height:150px;">
+    <p id="accuracyModalBody">여기에 정확도 관련 내용을 넣을 수 있습니다.</p>
   </div>
+</div>
+
   
 
 
@@ -120,7 +123,26 @@
           `;
           document.getElementById('accuracyModal').style.display = 'flex';
         });
-    }
+    
+
+
+
+
+  // 파이차트 이미지
+fetch('/polls/get_accuracy_pie_image/')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('accuracyPieImg').src = 'data:image/png;base64,' + data.image;
+    document.getElementById('accuracyModal').style.display = 'flex';
+  });
+  
+  }
+
+
+
+
+
+
 
     // 모달 닫기 버튼
     document.getElementById('closeAccuracyModal').onclick = function() {

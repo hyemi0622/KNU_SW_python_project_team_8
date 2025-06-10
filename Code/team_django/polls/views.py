@@ -3,8 +3,16 @@ from django.http import JsonResponse
 from .models import Question
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
+
+# 아이디 부여를 위한. 
 import uuid
 
+import matplotlib
+matplotlib.use('Agg') 
+# 그래프 그리기 위한 
+import matplotlib.pyplot as plt
+import io
+import base64
 
 
 import json
@@ -208,3 +216,29 @@ def get_accuracy_stats(request):
         "total": total,
         "accuracy": accuracy
     })
+
+
+def get_accuracy_pie_image(request):
+    counter = GlobalClickCount.objects.first()
+    save = counter.save_clicks if counter else 0
+    dont_save = counter.dont_save_clicks if counter else 0
+
+    fig, ax = plt.subplots(figsize=(2, 2))
+    ax.pie(
+        [save, dont_save],
+        labels=['accurate data', 'dummy'],
+        colors=['#4CAF50', '#F44336'],
+        autopct='%1.1f%%',
+        startangle=90,
+        counterclock=False
+    )
+    ax.axis('equal')
+
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png', bbox_inches='tight', transparent=True)
+    plt.close(fig)
+    buf.seek(0)
+    image_base64 = base64.b64encode(buf.read()).decode('utf-8')
+    buf.close()
+
+    return JsonResponse({'image': image_base64})
