@@ -16,7 +16,7 @@
 [![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](UsedLibraries) 
 
 #### 🖥️ 실행 화면 :
-[![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](UsedLibraries) 
+[![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](ExecutionScreen/README.md) 
 
 #### 📖 템플릿 :
 [![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](Template)
