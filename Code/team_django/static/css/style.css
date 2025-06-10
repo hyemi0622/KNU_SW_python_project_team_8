@@ -185,3 +185,66 @@ body {
   width: 100%;
   max-width: 500px;
 }
+
+
+
+/*정확도 버튼*/
+.accuracy-btn {
+  margin-top: 12px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: 'Pretendard', sans-serif;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.accuracy-btn:hover {
+  background-color: #333;
+}
+
+
+
+/*정확도 모달 버튼 */
+
+/* 모달 기본 숨김 상태 */
+.modal {
+  display: none; /* 숨김 */
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4); /* 반투명 배경 */
+}
+
+/* 모달 내부 박스 */
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 30px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+  font-family: 'Pretendard', sans-serif;
+}
+
+/* 닫기 버튼 */
+.close {
+  position: absolute;
+  right: 20px;
+  top: 15%;
+  font-size: 28px;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+}
+.close:hover {
+  color: black;
+}
