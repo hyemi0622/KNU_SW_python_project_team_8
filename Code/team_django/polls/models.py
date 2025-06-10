@@ -59,3 +59,13 @@ class Question(models.Model):
 
 
 
+#저장, 안저장 클릭하면 횟수를 셀수 있는 모델
+
+class GlobalClickCount(models.Model):
+    save_clicks = models.IntegerField(default=0)
+    dont_save_clicks = models.IntegerField(default=0)
+
+
+
+
+

@@ -3,13 +3,16 @@ from django.http import JsonResponse
 from .models import Question
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
+import uuid
+
+
 
 import json
 import traceback
 from dotenv import load_dotenv
 
+from .models import MemoryRecord, GlobalClickCount
 
-from .models import MemoryRecord
 
 from openai import OpenAI  #  최신 방식: OpenAI 인스턴스 생성
 
@@ -134,6 +137,9 @@ def save_memory_record(request):
             qa_json=data.get("qa", []),
             summary=data.get("summary", "")
         )
+    
+
+
         return JsonResponse({"id": str(record.id), "status": "saved"})
 
     return JsonResponse({"error": "POST only"}, status=405)
@@ -155,8 +161,50 @@ def otherusers(request):
         'row4': row4,
     })
 
-
+@csrf_exempt
 def get_memory_records(request):
     # 최신순(가장 최근에 저장한 것부터)으로 정렬
     records = MemoryRecord.objects.all().order_by('-id').values('id', 'keyword', 'summary')
     return JsonResponse(list(records), safe=False)
+
+
+
+
+# 저장, 안저장 중  어떤 걸  클릭했는지 저장해주는 함수. 
+# views.py
+
+
+@csrf_exempt
+def update_global_click_count(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        action = data.get("action")
+        counter, _ = GlobalClickCount.objects.get_or_create(pk=1)
+        if action == "save":
+            counter.save_clicks += 1
+        elif action == "dont_save":
+            counter.dont_save_clicks += 1
+        else:
+            return JsonResponse({"error": "Invalid action"}, status=400)
+        counter.save()
+        return JsonResponse({
+            "save_clicks": counter.save_clicks,
+            "dont_save_clicks": counter.dont_save_clicks,
+        })
+    return JsonResponse({"error": "POST only"}, status=405)
+
+
+
+# 절확도 계산
+def get_accuracy_stats(request):
+    counter = GlobalClickCount.objects.first()
+    if not counter:
+        return JsonResponse({"total": 0, "accuracy": 0})
+    total = counter.save_clicks + counter.dont_save_clicks
+    accuracy = 0
+    if total > 0:
+        accuracy = round(counter.save_clicks / total * 100, 1)
+    return JsonResponse({
+        "total": total,
+        "accuracy": accuracy
+    })

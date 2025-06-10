@@ -1,5 +1,39 @@
+function updateGlobalClickCount(action) {
+  fetch('/polls/update_global_click/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: action }) // action: "save" 또는 "dont_save"
+  })
+  .then(res => res.json())
+  .then(data => {
+    // 필요시 카운트 표시 등
+    // console.log(data);
+  });
+}
   
-  
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  // "Save" 버튼과 "Not Save" 버튼에 클릭 이벤트 연결
+  const saveBtn = document.getElementById("modalSaveBtn");
+  const dontSaveBtn = document.getElementById("modalNotSaveBtn");
+
+  if (saveBtn) {
+    saveBtn.addEventListener("click", function() {
+      updateGlobalClickCount("save");
+    });
+  }
+  if (dontSaveBtn) {
+    dontSaveBtn.addEventListener("click", function() {
+      updateGlobalClickCount("dont_save");
+    });
+  }
+});
+
+
+
 function showGptResponseModal(summaryText) {
   const modal = document.getElementById("gptResponseModal");
   const modalBody = document.getElementById("gptResponseModalBody");
@@ -21,7 +55,18 @@ function showGptResponseModal(summaryText) {
   modalNotSaveBtn.onclick = null;
 
   modalSaveBtn.onclick = () => {
-  modal.style.display = "none";
+    updateGlobalClickCount("save");
+
+
+
+
+
+
+
+    modal.style.display = "none";
+
+  
+
   // 키워드 입력 모달 띄우기
   const keywordModal = document.getElementById("keywordModal");
   keywordModal.style.display = "flex";
@@ -70,7 +115,13 @@ document.getElementById("confirmSaveBtn").onclick = async () => {
 };
 
   modalNotSaveBtn.onclick = () => {
-  modal.style.display = "none";
+    updateGlobalClickCount("dont_save");
+    modal.style.display = "none";
+  
+  
+ 
+  
+  
   // 메모리 게임 이동 여부 모달 띄우기
   const memoryGameModal = document.getElementById("memoryGameModal");
   memoryGameModal.style.display = "flex";

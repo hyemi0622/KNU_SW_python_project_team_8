@@ -5,13 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>그그그 뭐지</title>
-
-
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600&display=swap" rel="stylesheet" />
-
-
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-
   <style>
     body {
       font-family: 'Pretendard', sans-serif;
@@ -37,7 +32,6 @@
           <a href="{% url 'meetourteam' %}"><button>Meet The Team</button></a> 
         </div>
       </div>
-
       <div class="navbar-right">
         <div class="dot black"></div>
         <div class="dot chachol"></div>
@@ -46,7 +40,7 @@
     </div>
   </div>
   
-  <!--  메인 콘텐츠 (Hero 영역 분할) -->
+  <!--  메인 콘텐츠 (Hero 영역) -->
   <section class="hero">
     <div class="hero-left">
       <h1 id="wave-title">Call Back the Lost<br>Moments</h1>
@@ -55,11 +49,10 @@
         Let’s bring your story back—together.<br>
       </p>
       <a href="{% url 'chat' %}">
-      <button class="explore-btn">Find Your Memory</button>
-
+        <button class="explore-btn">Find Your Memory</button>
       </a>
       <button class="accuracy-btn">정확도</button>
-</a></div>
+    </div>
     <div class="hero-right">
       <img src="{% static 'images/moji.png' %}" alt="Moji 로고" />
     </div>
@@ -67,74 +60,98 @@
 
 
 
-<!-- 정확도 모달 -->
-<div id="accuracyModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>정확도 정보</h2>
-    <p>여기에 정확도 관련 내용을 넣을 수 있습니다.</p>
+
+
+  <!-- 정확도 모달 -->
+  <div id="accuracyModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeAccuracyModal">&times;</span>
+      <h2>정확도 정보</h2>
+      <p id="accuracyModalBody">여기에 정확도 관련 내용을 넣을 수 있습니다.</p>
+    </div>
   </div>
-</div>
+  
 
 
 
-<!-- 기존 wave-title 효과 스크립트 (변경 없이 그대로 유지) -->
-<script>
-  window.addEventListener("DOMContentLoaded", () => {
-    const title = document.getElementById("wave-title");
-    const nodes = Array.from(title.childNodes);
-    let i = 0;
 
-    title.innerHTML = '';
 
-    nodes.forEach(node => {
-      if (node.nodeType === 3) {
-        // 일반 텍스트
-        const chars = node.textContent.split('');
-        chars.forEach(char => {
-          const span = document.createElement('span');
-          span.textContent = char === ' ' ? '\u00A0' : char;
-          span.classList.add('wave-letter');
-          span.style.animationDelay = `${i * 0.08}s`;
-          title.appendChild(span);
-          i++;
-        });
-      } else if (node.nodeType === 1 && node.tagName === 'BR') {
-        // <br> 태그
-        title.appendChild(document.createElement('br'));
-      }
+
+  <!-- wave-title 효과 스크립트 -->
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const title = document.getElementById("wave-title");
+      const nodes = Array.from(title.childNodes);
+      let i = 0;
+      title.innerHTML = '';
+      nodes.forEach(node => {
+        if (node.nodeType === 3) {
+          // 일반 텍스트
+          const chars = node.textContent.split('');
+          chars.forEach(char => {
+            const span = document.createElement('span');
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.classList.add('wave-letter');
+            span.style.animationDelay = `${i * 0.08}s`;
+            title.appendChild(span);
+            i++;
+          });
+        } else if (node.nodeType === 1 && node.tagName === 'BR') {
+          // <br> 태그
+          title.appendChild(document.createElement('br'));
+        }
+      });
     });
-  });
-</script>
+  </script>
 
-<!-- 🔽 정확도 모달 열고 닫는 코드 별도 추가 -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const modal = document.getElementById("accuracyModal");
-    const btn = document.querySelector(".accuracy-btn");
-    const span = document.querySelector(".close");
 
-    if (btn) {
-      btn.onclick = function () {
-        modal.style.display = "block";
-      }
+
+
+  <!-- 정확도 모달 및 버튼 동작 스크립트 -->
+  <script>
+    // 정확도 정보 불러와서 모달에 표시
+    function showAccuracyModal() {
+      fetch('/polls/get_accuracy_stats/')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('accuracyModalBody').innerHTML = `
+            총 데이터 수 : <b>${data.total}개</b><br>
+            정확도 : <b>${data.accuracy}%</b>
+          `;
+          document.getElementById('accuracyModal').style.display = 'flex';
+        });
     }
 
-    if (span) {
-      span.onclick = function () {
-        modal.style.display = "none";
+    // 모달 닫기 버튼
+    document.getElementById('closeAccuracyModal').onclick = function() {
+      document.getElementById('accuracyModal').style.display = 'none';
+    };
+
+    document.addEventListener("DOMContentLoaded", function() {
+      // 정확도 버튼에 정확도 수치 표시
+      fetch('/polls/get_accuracy_stats/')
+        .then(res => res.json())
+        .then(data => {
+          const accuracyBtn = document.querySelector('.accuracy-btn');
+          if (accuracyBtn) {
+            accuracyBtn.textContent = `${data.accuracy}%`;
+          }
+        });
+
+      // 정확도 버튼 클릭 시 모달 열기
+      const accuracyBtn = document.querySelector('.accuracy-btn');
+      if (accuracyBtn) {
+        accuracyBtn.onclick = showAccuracyModal;
       }
-    }
 
-    window.onclick = function (event) {
-      if (event.target === modal) {
-        modal.style.display = "none";
-      }
-    }
-  });
-</script>
-
-
-</body>
+      // 모달 바깥 클릭 시 닫기
+      const accuracyModal = document.getElementById('accuracyModal');
+      accuracyModal.addEventListener('click', function(event) {
+        if (event.target === accuracyModal) {
+          accuracyModal.style.display = 'none';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
