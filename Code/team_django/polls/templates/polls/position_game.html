@@ -328,9 +328,9 @@ canvas {
           <button class="action-btn" id="continueBtn" onclick="continueGame()" disabled>start</button>
         </div>
       </div>
-      <!-- 게임 영역 (초기엔 숨김) -->
+      <!-- 게임 영역. 아래 속성은 렌더링 해상도를 고정시킴. 즉, 어떤 화면 크기든 캔버스는 내부적으로 800.600 좌표계를 유지함 -->
       <div id="game-area">
-        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <canvas id="gameCanvas" width="800" height="600"></canvas> 
         <div class="word-list-wrapper">
           <div class="word-list" id="targetList"></div>
           <button id="next-level-btn" onclick="goToNextLevel()">next level</button>
