@@ -90,7 +90,7 @@
         "radius": 20
       },
       {
-        "name": "참새",
+        "name": "종이새",
         "xRange" : {"min":266, "max":322},
         "yRange" : {"min":377, "max":398},
         "radius": 20
@@ -102,7 +102,7 @@
         "radius": 20
       },
       {
-        "name": "미니왕관",
+        "name": "왕관",
         "xRange" : {"min":595, "max":637},
         "yRange" : {"min":216, "max":234},
         "radius": 20
@@ -116,7 +116,7 @@
       {
         "name": "우산",
         "xRange" : {"min":440, "max":467},
-        "yRange" : {"min":132, "max":203},
+        "yRange" : {"min":132, "max":213},
         "radius": 20
       },
       {
@@ -138,7 +138,7 @@
         "radius": 20
       },
       {
-        "name": "미니구두",
+        "name": "작은구두",
         "xRange" : {"min":309, "max":320},
         "yRange" : {"min":336, "max":350},
         "radius": 20
