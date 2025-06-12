@@ -43,6 +43,7 @@
   <!--  메인 콘텐츠 (Hero 영역) -->
   <section class="hero">
     <div class="hero-left">
+      <button class="accuracy-btn">정확도</button>
       <h1 id="wave-title">Call Back the Lost<br>Moments</h1>
       <p>Can’t recall that one word or moment? <br>
         We turn fuzzy thoughts into clear memories.<br>
@@ -51,7 +52,7 @@
       <a href="{% url 'chat' %}">
         <button class="explore-btn">Find Your Memory</button>
       </a>
-      <button class="accuracy-btn">정확도</button>
+      
     </div>
     <div class="hero-right">
       <img src="{% static 'images/moji.png' %}" alt="Moji 로고" />
@@ -63,19 +64,26 @@
 
 
   <!-- 정확도 모달 -->
-  <!-- 정확도 모달 -->
 <div id="accuracyModal" class="modal">
   <div class="modal-content">
     <span class="close" id="closeAccuracyModal">&times;</span>
     <h2>정확도 정보</h2>
-    <img id="accuracyPieImg" src="" alt="정확도 파이차트" style="display:block; margin:0 auto; width:150px; height:150px;">
+    <div class="modal-images-row">
+  <div class="modal-image-col">
+    <div class="modal-image-title">Accuracy</div>
+    <img id="accuracyPieImg" src="" alt="정확도 파이차트" />
     <p id="accuracyModalBody">여기에 정확도 관련 내용을 넣을 수 있습니다.</p>
-    
-    
-    <img id="wordcloudImg" src="" alt="워드클라우드" style="display:block; margin:20px auto 0; width:90%; max-width:400px;">
-
+  </div>
+  <div class="modal-divider"></div>
+  <div class="modal-image-col">
+    <div class="modal-image-title">Top Words</div>
+    <img id="wordcloudImg" src="" alt="워드클라우드" />
   </div>
 </div>
+    
+  </div>
+</div>
+
 
   
 

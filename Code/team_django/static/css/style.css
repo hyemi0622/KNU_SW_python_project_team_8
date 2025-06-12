@@ -122,6 +122,7 @@ body {
   flex: 1;
   padding-left: 5rem;
   text-align: left;
+  flex-direction: column;
 }
 
 #wave-title {
@@ -174,11 +175,10 @@ body {
   font-family: 'Pretendard', sans-serif;
 }
 
-.hero-right {
-  flex: 1;
+.hero-left {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;   /* 세로로 쌓기 */
+  align-items: flex-start;  /* 왼쪽 정렬 (중앙 정렬 원하면 center) */
 }
 
 .hero-right img {
@@ -190,22 +190,96 @@ body {
 
 /*정확도 버튼*/
 .accuracy-btn {
-  margin-top: 12px;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-family: 'Pretendard', sans-serif;
-  background-color: black;
+  position: relative;
+  background: black;
   color: white;
+  padding: 12px 30px;
+  font-size: 14px;
+  font-family: 'Pretendard', sans-serif;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
+  border-radius: 40px; /* 기본 둥근 모서리 */
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+/* 구름 윗부분 둥근 뭉침 효과 - before, after */
+.accuracy-btn::before,
+.accuracy-btn::after {
+  content: '';
+  position: absolute;
+  background: black;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  top: -20px;
   transition: background-color 0.3s ease;
 }
 
+/* 왼쪽 구름 뭉침 */
+.accuracy-btn::before {
+  left: 10px;
+}
+
+/* 오른쪽 구름 뭉침 */
+.accuracy-btn::after {
+  right: 10px;
+}
+
+/* 호버 시 색상 변화 */
 .accuracy-btn:hover {
   background-color: #333;
 }
 
+.accuracy-btn:hover::before,
+.accuracy-btn:hover::after {
+  background-color: #333;
+}.accuracy-btn {
+  position: relative;
+  background: black;
+  color: white;
+  padding: 12px 30px;
+  font-size: 19px;
+  font-family: 'Pretendard', sans-serif;
+  border: none;
+  cursor: pointer;
+  border-radius: 40px; /* 기본 둥근 모서리 */
+  transition: background-color 0.3s ease;
+  display: flex;
+}
+
+/* 구름 윗부분 둥근 뭉침 효과 - before, after */
+.accuracy-btn::before,
+.accuracy-btn::after {
+  content: '';
+  position: absolute;
+  background: black;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  top: -20px;
+  transition: background-color 0.3s ease;
+}
+
+/* 왼쪽 구름 뭉침 */
+.accuracy-btn::before {
+  left: 10px;
+}
+
+/* 오른쪽 구름 뭉침 */
+.accuracy-btn::after {
+  right: 10px;
+}
+
+/* 호버 시 색상 변화 */
+.accuracy-btn:hover {
+  background-color: #333;
+}
+
+.accuracy-btn:hover::before,
+.accuracy-btn:hover::after {
+  background-color: #333;
+}
 
 
 /*정확도 모달 버튼 */
@@ -214,6 +288,8 @@ body {
 .modal {
   display: none; /* 숨김 */
   position: fixed;
+  justify-content: center;
+  align-items: center;
   z-index: 999;
   left: 0;
   top: 0;
@@ -225,15 +301,61 @@ body {
 
 /* 모달 내부 박스 */
 .modal-content {
-  background-color: #fff;
-  margin: 15% auto;
-  padding: 30px;
-  border-radius: 10px;
-  width: 400px;
-  max-width: 90%;
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 24px 24px 24px;
+  max-width: 700px;   /* 모달 최대 너비 제한 */
+  width: 90vw;        /* 작은 화면에서 꽉 차지 않게 */
+  box-sizing: border-box;
+  margin: 0 auto;
   text-align: center;
-  font-family: 'Pretendard', sans-serif;
 }
+
+.modal-images-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  margin: 24px 0 12px 0;
+  width: 100%;
+}
+
+.modal-image-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.modal-image-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+#accuracyPieImg, #wordcloudImg {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  display: block;
+  max-width: 100%;
+}
+
+.modal-divider {
+  width: 1px;
+  background: #e0e0e0;
+  height: 300px;
+  align-self: center;
+  margin: 0 10px;
+  border-radius: 1px;
+}
+
 
 /* 닫기 버튼 */
 .close {

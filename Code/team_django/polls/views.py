@@ -235,8 +235,8 @@ def get_accuracy_pie_image(request):
     fig, ax = plt.subplots(figsize=(2, 2))
     ax.pie(
         [save, dont_save],
-        labels=['accurate data', 'dummy'],
-        colors=['#4CAF50', '#F44336'],
+        labels=['save', 'not save'],
+        colors=["#595A6F", "#8D6B68"],
         autopct='%1.1f%%',
         startangle=90,
         counterclock=False
@@ -258,7 +258,7 @@ def get_accuracy_pie_image(request):
 
 
 #워드 클라우드 , 힌글 사용 가능하게 
-plt.rc('font', family='AppleGothic')
+plt.rc('font', family='MalgunGodic')
 plt.rcParams['axes.unicode_minus'] = False
 
 
@@ -280,7 +280,7 @@ def get_wordcloud_image(request):
         width=400,
         height=200,
         background_color='white',
-        font_path='/Library/Fonts/AppleGothic.ttf',  # macOS 기준
+        font_path = 'C:/Windows/Fonts/malgun.ttf',
         stopwords=korean_stopwords
     ).generate(text)
 
