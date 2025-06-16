@@ -16,4 +16,4 @@ with csv_path.open(newline='', encoding='utf-8') as csvfile:
             text=row['text']
         )
 
-print("✅ 질문 데이터가 성공적으로 추가되었습니다.")
+print("질문 데이터가 성공적으로 추가되었습니다.")
