@@ -1,51 +1,37 @@
-# 🛠️ 기술 스택
 
-본 프로젝트 **"그그그 뭐지?"**는 잊힌 기억을 회복하도록 돕는 AI 챗봇 웹 서비스입니다.  
-AI 응답 생성부터 사용자 인터페이스, 서버 배포까지 전 과정을 Django와 AWS 기반으로 구성하였습니다.
+## 📚 External Libraries Used
 
----
+### 🧩 Model 관련
 
-## 🧩 전체 아키텍처 구성도
-
-- **Frontend**: HTML, CSS, JavaScript
-- **Backend**: Django (Python)
-- **AI 응답 생성**: OpenAI GPT-3.5 API
-- **데이터 저장**: SQLite (Django 기본 DB)
-- **배포**: AWS EC2
+| 라이브러리 | 설명 |
+|-----------|------|
+| `uuid` | 사용자 고유 ID를 생성하는 파이썬 표준 라이브러리입니다. <br>형식은 32자리 16진수로, 5개의 그룹으로 구분되어 있습니다. <br>예: `280a8a4d-a27f-4d01-b031-2a003cc4c039`<br>→ 고유성이 높아 DB의 Primary Key로 자주 사용됩니다. |
 
 ---
 
-## 🔧 세부 기술 구성
+### 🧩 View 관련
 
-| 범주         | 기술/서비스         | 설명 |
-|--------------|---------------------|------|
-| 백엔드       | **Django**          | Python 기반 웹 프레임워크. URL 라우팅, 모델, 뷰 처리 |
-| 데이터 저장  | **SQLite**          | Django 기본 내장형 경량 DB. 로컬 개발 및 소규모 서비스에 적합 |
-| AI 응답 생성 | **OpenAI GPT-3.5**  | 기억 단서를 바탕으로 자연스러운 대화 응답 및 요약 생성 |
-| 배포         | **AWS EC2**         | Django 프로젝트를 EC2 리눅스 인스턴스에 배포하여 직접 운영 |
-
----
-
-## 🧪 사용한 외부 라이브러리
-
-| 라이브러리       | 설명 |
-|------------------|------|
-| `openai`         | OpenAI API 호출용 공식 Python SDK |
-| `requests`       | 외부 API 연동 및 HTTP 통신 처리 |
-| `gunicorn`       | EC2 배포 시 사용한 WSGI 서버 |
-| `whitenoise`     | 정적 파일(Django static) 서빙 최적화 |
-| `python-dotenv`  | 환경변수(.env)로 API 키 등 민감 정보 관리 |
+| 라이브러리 | 설명 |
+|-----------|------|
+| `from django.http import JsonResponse` | 클라이언트에 JSON 응답을 보낼 때 사용합니다. |
+| `from django.shortcuts import render` | 지정한 template 파일을 HTML로 렌더링하여 사용자에게 보여줍니다.<br>사용 예: `render(request, 'template_name.html')` |
+| `from django.views.decorators.csrf import csrf_exempt` | Django의 CSRF 보안 검사를 일시적으로 해제합니다. <br>※ 개발 환경에서만 사용하는 것이 안전합니다. |
+| `from .models import GameResult` | `models.py`에 정의된 클래스(`GameResult`)를 불러와 사용합니다. |
+| `import json` | JSON 데이터를 파이썬에서 사용하기 위한 표준 라이브러리입니다.<br>주로 API 통신 시 요청(request)과 응답(response)에 사용됩니다. |
 
 ---
 
-## ☁️ 배포 환경
+### 🧩 View 예시 코드
 
-- AWS EC2 리눅스 인스턴스에 Django 프로젝트 배포
-- `gunicorn`을 통한 애플리케이션 실행
-- 정적 파일은 `collectstatic` 후 `whitenoise`로 서빙
-- 보안: `.env` 파일로 OpenAI 키 등 민감 정보 관리
-- 웹 서버 설정 및 HTTPS는 선택적으로 구성 가능
-
----
+```python
+@csrf_exempt
+def save_score(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        user_id = data.get('user_id')
+        score = data.get('score')
+        GameResult.objects.create(user_id=user_id, score=score)
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'error': 'Invalid request'}, status=400)
 
 
