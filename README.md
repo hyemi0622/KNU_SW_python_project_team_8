@@ -9,10 +9,9 @@
 ## 🔗 주요 문서 바로가기
 
 
-
-[![📘 프로젝트 소개](https://img.shields.io/badge/📘_프로젝트_소개-success?style=for-the-badge)](explanation/README.md)
-[![🛠️ 기술 스택](https://img.shields.io/badge/🛠️_기술_스택-success?style=for-the-badge)](UsedLibraries/README.md)
-[![🗂️ 템플릿](https://img.shields.io/badge/🗂️_템플릿-success?style=for-the-badge)](Template/README.md)
+[![📘 프로젝트 소개](https://img.shields.io/badge/📘_프로젝트_소개-success?style=for-the-badge)](explanation/README.md)  
+[![🛠️ 기술 스택](https://img.shields.io/badge/🛠️_기술_스택-success?style=for-the-badge)](UsedLibraries/README.md)  
+[![🗂️ 템플릿](https://img.shields.io/badge/🗂️_템플릿-success?style=for-the-badge)](Template/README.md)  
 [![📚 사용한 라이브러리](https://img.shields.io/badge/📚_사용한_라이브러리-success?style=for-the-badge)](UsedLibraries/README.md)
 
 ---
