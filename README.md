@@ -13,7 +13,7 @@
 [![프로젝트 소개](https://img.shields.io/badge/프로젝트_소개-success?style=for-the-badge)](explanation/README.md)
 
 **🛠️ 기술 스택:**  
-[![기술 스택](https://img.shields.io/badge/기술_스택-success?style=for-the-badge)](UsedLibraries/README.md)
+[![기술 스택](https://img.shields.io/badge/기술_스택-success?style=for-the-badge)](StackTech/README.md)
 
 **🗂️ 템플릿:**  
 [![템플릿](https://img.shields.io/badge/템플릿-success?style=for-the-badge)](Template/README.md)
