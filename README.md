@@ -74,7 +74,8 @@
 
 ### 🖼️ Flow Chart
 
-<img width="800" alt="기억 복원 흐름도" src="https://github.com/user-attachments/assets/a1fd5c48-b938-4a61-9729-046d1a554b66.png" />
+![image](https://github.com/user-attachments/assets/02a47d36-1560-4b5a-9730-ccf6832ab8bf)
+
 
 > 💡 이미지 출처: Figma 기반 인터랙션 플로우 차트
 
