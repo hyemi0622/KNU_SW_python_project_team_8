@@ -20,7 +20,7 @@
   </style>
 </head>
 <body>
-  <!--  상단바 -->
+  <!-- 상단바 -->
   <div class="navbar-outer">
     <div class="navbar-inner">
       <div class="navbar-left">
@@ -40,9 +40,10 @@
     </div>
   </div>
   
-  <!--  메인 콘텐츠 (Hero 영역) -->
+  <!-- 메인 콘텐츠 (Hero 영역) -->
   <section class="hero">
     <div class="hero-left">
+      <button class="accuracy-btn">정확도</button>
       <h1 id="wave-title">Call Back the Lost<br>Moments</h1>
       <p>Can’t recall that one word or moment? <br>
         We turn fuzzy thoughts into clear memories.<br>
@@ -51,34 +52,31 @@
       <a href="{% url 'chat' %}">
         <button class="explore-btn">Find Your Memory</button>
       </a>
-      <button class="accuracy-btn">정확도</button>
     </div>
     <div class="hero-right">
       <img src="{% static 'images/moji.png' %}" alt="Moji 로고" />
     </div>
   </section>
 
-
-
-
-
   <!-- 정확도 모달 -->
-  <!-- 정확도 모달 -->
-<div id="accuracyModal" class="modal">
-  <div class="modal-content">
-    <span class="close" id="closeAccuracyModal">&times;</span>
-    <h2>정확도 정보</h2>
-    <img id="accuracyPieImg" src="" alt="정확도 파이차트" style="display:block; margin:0 auto; width:150px; height:150px;">
-    <p id="accuracyModalBody">여기에 정확도 관련 내용을 넣을 수 있습니다.</p>
+  <div id="accuracyModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeAccuracyModal">&times;</span>
+      <h2>정확도 정보</h2>
+      <div class="modal-images-row">
+        <div class="modal-image-col">
+          <div class="modal-image-title">Accuracy</div>
+          <img id="accuracyPieImg" src="" alt="정확도 파이차트" />
+          <p id="accuracyModalBody">여기에 정확도 관련 내용을 넣을 수 있습니다.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-image-col">
+          <div class="modal-image-title">Top Words</div>
+          <img id="wordcloudImg" src="" alt="워드클라우드" />
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-
-  
-
-
-
-
-
 
   <!-- wave-title 효과 스크립트 -->
   <script>
@@ -95,85 +93,88 @@
             const span = document.createElement('span');
             span.textContent = char === ' ' ? '\u00A0' : char;
             span.classList.add('wave-letter');
-            span.style.animationDelay = `${i * 0.08}s`;
+            span.style.animationDelay = `${i * 0.08}s`;  // ✅ 수정됨
             title.appendChild(span);
             i++;
           });
         } else if (node.nodeType === 1 && node.tagName === 'BR') {
-          // <br> 태그
           title.appendChild(document.createElement('br'));
         }
       });
     });
   </script>
 
-
-
-
   <!-- 정확도 모달 및 버튼 동작 스크립트 -->
   <script>
-    // 정확도 정보 불러와서 모달에 표시
     function showAccuracyModal() {
       fetch('/polls/get_accuracy_stats/')
         .then(res => res.json())
         .then(data => {
-          document.getElementById('accuracyModalBody').innerHTML = `
-            총 데이터 수 : <b>${data.total}개</b><br>
-            정확도 : <b>${data.accuracy}%</b>
-          `;
+          document.getElementById('accuracyModalBody').innerHTML = 
+            `총 데이터 수 : <b>${data.total}개</b><br>정확도 : <b>${data.accuracy}%</b>`;
           document.getElementById('accuracyModal').style.display = 'flex';
         });
-    
 
+      // 파이차트 이미지
+      fetch('/polls/get_accuracy_pie_image/')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('accuracyPieImg').src = 'data:image/png;base64,' + data.image;
+          document.getElementById('accuracyModal').style.display = 'flex';
+        });
 
-
-
-  // 파이차트 이미지
-fetch('/polls/get_accuracy_pie_image/')
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById('accuracyPieImg').src = 'data:image/png;base64,' + data.image;
-    document.getElementById('accuracyModal').style.display = 'flex';
-  });
-  
-  }
-
-
-
-
-
-
-
-    // 모달 닫기 버튼
-    document.getElementById('closeAccuracyModal').onclick = function() {
-      document.getElementById('accuracyModal').style.display = 'none';
-    };
+      // 워드클라우드 이미지
+      fetch('/polls/get_wordcloud_image/')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('wordcloudImg').src = 'data:image/png;base64,' + data.image;
+        });
+    }
 
     document.addEventListener("DOMContentLoaded", function() {
-      // 정확도 버튼에 정확도 수치 표시
       fetch('/polls/get_accuracy_stats/')
         .then(res => res.json())
         .then(data => {
           const accuracyBtn = document.querySelector('.accuracy-btn');
           if (accuracyBtn) {
-            accuracyBtn.textContent = `${data.accuracy}%`;
+            accuracyBtn.textContent = `${data.accuracy}%`;  //  수정됨
           }
         });
 
-      // 정확도 버튼 클릭 시 모달 열기
       const accuracyBtn = document.querySelector('.accuracy-btn');
       if (accuracyBtn) {
         accuracyBtn.onclick = showAccuracyModal;
       }
 
-      // 모달 바깥 클릭 시 닫기
       const accuracyModal = document.getElementById('accuracyModal');
       accuracyModal.addEventListener('click', function(event) {
         if (event.target === accuracyModal) {
           accuracyModal.style.display = 'none';
         }
       });
+
+      document.getElementById('closeAccuracyModal').onclick = function() {
+        document.getElementById('accuracyModal').style.display = 'none';
+      };
     });
   </script>
+  <script>
+   window.addEventListener("DOMContentLoaded", () => {
+  fetch("/polls/get_wordcloud_image/")
+    .then(res => res.json())
+    .then(data => {
+      if (data.image) {
+        const img = document.getElementById("wordcloudImg");  // ✅ 정확한 ID
+        img.src = `data:image/png;base64,${data.image}`;
+      } else {
+        console.warn("워드클라우드 이미지 없음");
+      }
+    })
+    .catch(error => {
+      console.error("워드클라우드 로딩 오류:", error);
+    });
+});
+
+</script>
 </body>
 </html>

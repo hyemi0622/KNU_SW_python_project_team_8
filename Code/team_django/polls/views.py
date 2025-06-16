@@ -92,19 +92,35 @@ def process_answers(request):
             qa_list = data.get("qa", [])
 
             prompt = f"""
-당신은 기억을 찾아주는 심리학자 입니다. 사용자는 어떤 기억을 떠올리고 싶어 하지만 스스로 잘 떠올리지 못하고 있습니다.
+당신은 사람의 기억을 찾아주는 **기억 추론 AI**입니다.  
+사용자는 어떤 대상을 잊었고, 그것이 무엇인지 알고 싶어합니다.
 
-카테고리: {category}
+당신의 임무:
+- 아래 질문-답변 리스트만을 바탕으로 사용자가 찾으려는 **기억 대상**을 하나 정확히 추론합니다.
+- 반드시 **단정적으로 하나의 주 추론 결과**를 먼저 제시하세요.
+- 이어서, **비슷한 후보 5개를 정확히 번호를 붙여(1~5)** 리스트 형태로 제공합니다.
+- 출력 형식은 반드시 아래와 같이 따르세요. 형식을 절대 바꾸지 마세요.
+- 콘텐츠를 선택한 경우 인물 이름, 캐릭터 이름 위주로 검색해주세요.
+- 노래인 경우 가사, 가수 위주로 검색해주세요.
+- 장소인 경우 각국의 랜드마크 위주로 찾아주세요.
+
+
+입력 정보
+카테고리: {category}  
 세부 분류: {subcategory}
 
-질문-답변 목록:
+질문과 답변:
 {json.dumps(qa_list, ensure_ascii=False, indent=2)}
 
-당신은 이 정보만으로 사용자가 찾고자 하는 기억을 추론해서 알려줘야 합니다. 네이버, 구글을 이용해 검색해주세요. 
-**그리고 추론 결과를를 구체적으로 하나 제시해야 합니다.**  
-만약 복수의 후보가 있을 경우, 5가지 정도의 선택지를 주세요.   
-제목은 응답의 첫 줄에 굵게 제시해 주세요.  
+출력 형식 (이 형식을 그대로 지켜야 합니다)
+1의 대상명에 가장 결과로 추정 되는 걸 띄우고 2~4번에 순차적으로 가능성 있는 다른 후보를 띄워줘.
+**기억 추론 결과: 
 
+1. [정확한 대상명]
+2. [정확한 대상명]
+3. [정확한 대상명]
+4. [정확한 대상명]
+5. [정확한 대상명]
 """
 
             # 최신 방식으로 GPT 호출
@@ -237,6 +253,46 @@ def get_accuracy_pie_image(request):
     buf = io.BytesIO()
     plt.savefig(buf, format='png', bbox_inches='tight', transparent=True)
     plt.close(fig)
+    buf.seek(0)
+    image_base64 = base64.b64encode(buf.read()).decode('utf-8')
+    buf.close()
+
+    return JsonResponse({'image': image_base64})
+
+
+
+
+
+from wordcloud import WordCloud
+
+
+#  Mac 한글 폰트 설정 (matplotlib + wordcloud 모두 적용)
+plt.rc('font', family='AppleGothic')
+plt.rcParams['axes.unicode_minus'] = False
+
+def get_wordcloud_image(request):
+    # 저장된 summary 전체 불러오기
+    summaries = MemoryRecord.objects.values_list('summary', flat=True)
+    text = ' '.join(summaries) if summaries else 'No Data'
+
+    # 한글 불용어 집합
+    korean_stopwords = {
+        "에게", "가", "는", "은", "을", "를", "에", "의", "에서", "으로", "로", "과", "와", "도", "만", "보다", "처럼",
+        "까지", "부터", "하고", "이나", "라도", "마저", "조차", "든지", "이라도", "라든지", "께서", "한테", "밖에"
+    }
+
+    #  워드클라우드 생성 (Mac 내장 폰트 AppleGothic 사용)
+    wordcloud = WordCloud(
+        width=400,
+        height=200,
+        background_color='white',
+        font_path='/System/Library/Fonts/Supplemental/AppleGothic.ttf',
+        stopwords=korean_stopwords
+    ).generate(text)
+
+    # 이미지 → base64 변환
+    buf = io.BytesIO()
+    wordcloud.to_image().save(buf, format='PNG')
     buf.seek(0)
     image_base64 = base64.b64encode(buf.read()).decode('utf-8')
     buf.close()
