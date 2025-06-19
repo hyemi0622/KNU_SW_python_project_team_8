@@ -20,7 +20,7 @@
 ### 배포된 사이트 :
 http://18.116.20.223:8000/
 
-![image](https://github.com/user-attachments/assets/79313326-3852-4a1d-9fef-9950d88ed798)
+
 
 
 
