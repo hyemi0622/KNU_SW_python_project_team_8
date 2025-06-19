@@ -10,7 +10,7 @@
 [![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](./Installation&Execution/README.md)
 
 #### 💡 사용된 라이브러리 :
-[![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](UsedLibraries) 
+[![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](StackTech) 
 
 #### 📖 템플릿 :
 [![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](Template)
