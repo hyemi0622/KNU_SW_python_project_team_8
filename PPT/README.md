@@ -1,1 +1,12 @@
-
+![1](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/screenshots/001.jpg)
+![2](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/screenshots/002.jpg)
+![3](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/screenshots/003.jpg)
+![4](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/screenshots/004.jpg)
+![5](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/screenshots/005.jpg)
+![6](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/screenshots/006.jpg)
+![7](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/screenshots/007.jpg)
+![8](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/screenshots/008.jpg)
+![9](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/screenshots/009.jpg)
+![10](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/screenshots/010.jpg)
+![11](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/screenshots/011.jpg)
+![12](https://github.com/hyemi0622/KNU_SW_python_project_team_8/blob/main/screenshots/012.jpg)
