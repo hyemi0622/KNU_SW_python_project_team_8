@@ -10,6 +10,9 @@
 #### 🖼️ 실행화면 :
 [![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](./DemoScreen/README.md)
 
+#### 📥 PPT 내용 :
+[![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](./PPT/README.md)
+
 #### 🚀 설치 및 실행 방법 :
 [![바로가기](https://img.shields.io/badge/%20바로가기-28a745)](./Installation&Execution/README.md)
 
