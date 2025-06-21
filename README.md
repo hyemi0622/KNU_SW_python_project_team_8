@@ -38,3 +38,62 @@
 | 5주차 | [![5주차 내용](https://img.shields.io/badge/5주차_내용-60a5fa)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Week/5th_Week)  | 위치 찾기 게임 개발 |  Django로 사용자 기록 db 연동 | 웹사이트 Meet The Team, Remember Other users 파트 개발  |![status](https://img.shields.io/badge/Finish%20-009000) |
 | 6주차 | [![6주차 내용](https://img.shields.io/badge/6주차_내용-60a5fa)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Week/6th_Week)  | 게임 오류 나는 부분 수정 |  AWS로 서버 연동 |  Memory Game 파트 디자인 수정 / 오류 나는 부분들 수정  |![status](https://img.shields.io/badge/Finish%20-009000) |
 | 7주차 | [![7주차 내용](https://img.shields.io/badge/7주차_내용-60a5fa)](https://github.com/hyemi0622/KNU_SW_python_project_team_8/tree/main/Week/7th_Week)  | 발표 대본 만들기 | 발표 대본 만들기 | PPT 만들기  |![status](https://img.shields.io/badge/Finish%20-009000) |
+
+---
+### 📁 프로젝트 구조
+```markdown
+├── mysite/                     # Django 설정 디렉토리
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+│
+├── polls/                      # 메인 앱 디렉토리
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   ├── views.py
+│   ├── migrations/
+│   │   ├── __init__.py
+│   │   ├── 0001_initial.py
+│   │   ├── 0002_alter_question_category.py
+│   │   ├── ...
+│   ├── scripts/
+│   └── templates/polls/        # 템플릿 폴더 (HTML 파일)
+│       ├── chat.html
+│       ├── fourpanel.html
+│       ├── index.html
+│       ├── meetourteam.html
+│       ├── memorygame.html
+│       ├── otherusers.html
+│       ├── position_game.html
+│       └── word_game.html
+│
+├── static/                     # 정적 파일 (CSS, JS, 이미지 등)
+│   ├── css/
+│   │   ├── chat.css
+│   │   ├── fourpanel.css
+│   │   ├── meetourteam.css
+│   │   ├── otherusers.css
+│   │   └── style.css
+│   ├── data/
+│   │   ├── position_game_levels.json
+│   │   └── word_game_levels.json
+│   ├── images/ # 이미지가 믾아서 생략
+│   └── js/
+│       ├── chat.js
+│       ├── fourpanel.js
+│       ├── meetourteam.js
+│       ├── otherusers.js
+│       ├── position_game.js
+│       └── word_game.js
+│
+├── .gitignore
+├── insert_questions.py         # 질문 데이터를 삽입하는 스크립트로 추정
+├── manage.py                   # Django 명령어 실행 진입점
+└── questions_all_categories.csv # 질문 카테고리 데이터
+```
